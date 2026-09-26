@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, MapPin, ChevronDown, Users, Mic, Star, Award } from "lucide-react";
 import { NetworkGraph } from "@/components/ui/network-graph";
@@ -29,7 +30,7 @@ function CountdownUnit({ value, label }: { value: number; label: string }) {
 
 function CountdownSeparator() {
   return (
-    <span className="text-2xl sm:text-3xl font-bold text-[var(--gold-600)] pb-5 opacity-50">:</span>
+    <span className="text-2xl sm:text-3xl font-bold text-[var(--cyan-400)] pb-5 opacity-50">:</span>
   );
 }
 
@@ -47,9 +48,9 @@ function HeroSidePanel({ mounted }: { mounted: boolean }) {
       {/* Stats card */}
       <div
         className="rounded-2xl border border-[var(--border-subtle)] p-5"
-        style={{ background: "rgba(11,30,61,0.55)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,21,43,0.65)", backdropFilter: "blur(20px)" }}
       >
-        <p className="text-[9px] font-bold tracking-[0.2em] uppercase text-[var(--gold-500)] mb-4">
+        <p className="text-[9px] font-bold tracking-[0.2em] uppercase text-[var(--cyan-400)] mb-4">
           Summit At a Glance
         </p>
         <div className="grid grid-cols-2 gap-3">
@@ -61,7 +62,7 @@ function HeroSidePanel({ mounted }: { mounted: boolean }) {
           ].map(({ icon: Icon, value, label }) => (
             <div key={label} className="flex flex-col gap-1">
               <div className="flex items-center gap-1.5">
-                <Icon size={12} className="text-[var(--gold-400)]" />
+                <Icon size={12} className="text-[var(--cyan-400)]" />
                 <span className="text-[10px] font-medium text-[var(--text-muted)] uppercase tracking-wider">{label}</span>
               </div>
               <span className="font-display text-xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
@@ -72,13 +73,13 @@ function HeroSidePanel({ mounted }: { mounted: boolean }) {
         </div>
         <div className="mt-4 pt-4 border-t border-[var(--border-subtle)]">
           <div className="flex items-center gap-2">
-            <MapPin size={11} className="text-[var(--gold-400)] flex-shrink-0" />
+            <MapPin size={11} className="text-[var(--cyan-400)] flex-shrink-0" />
             <span className="text-[10px] text-[var(--text-secondary)] leading-snug">
               Jio World Convention Centre, BKC, Mumbai
             </span>
           </div>
           <div className="flex items-center gap-2 mt-1.5">
-            <Calendar size={11} className="text-[var(--gold-400)] flex-shrink-0" />
+            <Calendar size={11} className="text-[var(--cyan-400)] flex-shrink-0" />
             <span className="text-[10px] text-[var(--text-secondary)]">19 February 2027 · Full Day</span>
           </div>
         </div>
@@ -87,9 +88,9 @@ function HeroSidePanel({ mounted }: { mounted: boolean }) {
       {/* Speaker spotlight card */}
       <div
         className="rounded-2xl border border-[var(--border-subtle)] p-5"
-        style={{ background: "rgba(11,30,61,0.55)", backdropFilter: "blur(20px)" }}
+        style={{ background: "rgba(10,21,43,0.65)", backdropFilter: "blur(20px)" }}
       >
-        <p className="text-[9px] font-bold tracking-[0.2em] uppercase text-[var(--gold-500)] mb-3">
+        <p className="text-[9px] font-bold tracking-[0.2em] uppercase text-[var(--cyan-400)] mb-3">
           Featured Speakers
         </p>
         <div className="flex flex-col gap-3">
@@ -105,14 +106,14 @@ function HeroSidePanel({ mounted }: { mounted: boolean }) {
               <div className="min-w-0">
                 <p className="text-xs font-semibold text-white leading-tight truncate">{sp.name}</p>
                 <p className="text-[10px] text-[var(--text-muted)] truncate">{sp.title}</p>
-                <p className="text-[10px] text-[var(--gold-400)] truncate">{sp.companyShort}</p>
+                <p className="text-[10px] text-[var(--cyan-400)] truncate">{sp.companyShort}</p>
               </div>
             </div>
           ))}
           <a
             href="#speakers"
             onClick={(e) => { e.preventDefault(); document.getElementById("speakers")?.scrollIntoView({ behavior: "smooth" }); }}
-            className="text-[10px] font-semibold text-[var(--teal-400)] hover:text-[var(--teal-300)] flex items-center gap-1 mt-1 transition-colors"
+            className="text-[10px] font-semibold text-[var(--cyan-400)] hover:text-[var(--cyan-300)] flex items-center gap-1 mt-1 transition-colors"
           >
             View all speakers <ArrowRight size={10} />
           </a>
@@ -123,9 +124,9 @@ function HeroSidePanel({ mounted }: { mounted: boolean }) {
       {mounted && (
         <div
           className="rounded-2xl border border-[var(--border-default)] p-4"
-          style={{ background: "rgba(212,165,75,0.06)", backdropFilter: "blur(20px)" }}
+          style={{ background: "rgba(0,242,254,0.04)", backdropFilter: "blur(20px)" }}
         >
-          <p className="text-[9px] font-bold tracking-[0.2em] uppercase text-[var(--gold-500)] mb-3 text-center">
+          <p className="text-[9px] font-bold tracking-[0.2em] uppercase text-[var(--cyan-400)] mb-3 text-center">
             Time to Summit
           </p>
           <CountdownDisplay />
@@ -164,22 +165,30 @@ export function HeroSection() {
     <section
       id="hero"
       className="relative min-h-screen flex flex-col justify-center overflow-hidden"
-      style={{ background: "linear-gradient(160deg, #06111f 0%, #0B1E3D 45%, #091828 80%, #06111f 100%)" }}
+      style={{ background: "linear-gradient(160deg, #050b14 0%, #0a152b 45%, #0f1d3a 80%, #050b14 100%)" }}
       aria-label="BFSI Tech Innovation Summit 2027 Hero"
     >
       {/* Network graph background */}
-      <div className="absolute inset-0 opacity-50" aria-hidden="true">
+      <div className="absolute inset-0 opacity-40" aria-hidden="true">
         {mounted && (
-          <NetworkGraph nodeCount={60} color="rgba(212,165,75," className="w-full h-full" />
+          <NetworkGraph nodeCount={60} color="rgba(0,242,254," className="w-full h-full" />
         )}
       </div>
 
-      {/* Radial light behind left content */}
+      {/* Radial cyan & purple glows behind hero */}
       <div
         className="absolute pointer-events-none"
         style={{
-          top: "20%", left: "-5%", width: "55%", height: "60%",
-          background: "radial-gradient(ellipse, rgba(212,165,75,0.05) 0%, transparent 65%)",
+          top: "15%", left: "-5%", width: "55%", height: "60%",
+          background: "radial-gradient(ellipse, rgba(0,242,254,0.12) 0%, transparent 65%)",
+        }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          top: "30%", right: "10%", width: "45%", height: "50%",
+          background: "radial-gradient(ellipse, rgba(224,0,255,0.1) 0%, transparent 65%)",
         }}
         aria-hidden="true"
       />
@@ -187,7 +196,7 @@ export function HeroSection() {
       {/* Bottom fade */}
       <div
         className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
-        style={{ background: "linear-gradient(to top, #06111f, transparent)" }}
+        style={{ background: "linear-gradient(to top, #050b14, transparent)" }}
         aria-hidden="true"
       />
 
@@ -196,16 +205,33 @@ export function HeroSection() {
 
           {/* ── Left column ── */}
           <div className="flex-1 min-w-0">
+            {/* Logo Banner in Hero */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="mb-6"
+            >
+              <Image
+                src="/logo.png"
+                alt="3rd BFSI Tech Innovation Summit 2027"
+                width={360}
+                height={120}
+                className="w-full max-w-sm md:max-w-md h-auto object-contain drop-shadow-[0_0_35px_rgba(0,242,254,0.35)]"
+                priority
+              />
+            </motion.div>
+
             {/* Edition badge */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-[var(--gold-500)] bg-[rgba(212,165,75,0.07)]"
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-[rgba(0,242,254,0.4)] bg-[rgba(0,242,254,0.06)]"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold-400)] animate-pulse-gold" />
-              <span className="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--gold-400)]">
-                {SUMMIT.edition} Edition · {SUMMIT.year}
+              <span className="w-2 h-2 rounded-full bg-[var(--cyan-400)] animate-pulse-cyan" />
+              <span className="text-xs font-semibold tracking-[0.18em] uppercase text-[var(--cyan-400)]">
+                {SUMMIT.edition} Edition · {SUMMIT.year} · Mumbai
               </span>
             </motion.div>
 

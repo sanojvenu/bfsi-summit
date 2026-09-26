@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { SUMMIT } from "@/lib/utils";
@@ -73,8 +74,8 @@ export function Navbar() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           scrolled
-            ? "bg-[rgba(6,17,31,0.92)] backdrop-blur-xl border-b border-[rgba(212,165,75,0.15)] py-3"
-            : "bg-transparent py-5"
+            ? "bg-[rgba(5,11,20,0.92)] backdrop-blur-xl border-b border-[rgba(0,242,254,0.2)] py-2.5"
+            : "bg-transparent py-4"
         )}
         role="banner"
       >
@@ -82,22 +83,20 @@ export function Navbar() {
           {/* Logo */}
           <a
             href="#"
-            className="flex flex-col leading-tight group"
-            aria-label="BFSI Tech Innovation Summit — Home"
+            className="flex items-center gap-3 group focus:outline-none"
+            aria-label="BFSI Tech Innovation Summit 2027 — Home"
             onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
           >
-            <span className="text-xs font-semibold tracking-[0.18em] uppercase text-[var(--gold-500)] group-hover:text-[var(--gold-300)] transition-colors">
-              BFSI Tech
-            </span>
-            <span
-              className="font-display text-white text-lg font-bold leading-tight"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              Innovation Summit
-            </span>
-            <span className="text-[10px] tracking-widest uppercase text-[var(--text-muted)]">
-              {SUMMIT.dateShort} · Mumbai
-            </span>
+            <div className="relative h-10 md:h-12 w-auto aspect-[1.5/1] flex items-center">
+              <Image
+                src="/logo.png"
+                alt="3rd BFSI Tech Innovation Summit 2027 Logo"
+                width={180}
+                height={60}
+                className="h-full w-auto object-contain drop-shadow-[0_0_12px_rgba(0,242,254,0.3)] group-hover:scale-105 transition-transform duration-300"
+                priority
+              />
+            </div>
           </a>
 
           {/* Desktop Nav */}

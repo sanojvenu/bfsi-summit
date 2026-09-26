@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { X, Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 import { SUMMIT } from "@/lib/utils";
 
@@ -33,18 +34,16 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-[var(--border-subtle)]">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="mb-4">
-              <span className="text-xs font-semibold tracking-[0.18em] uppercase text-[var(--gold-500)]">
-                BFSI Tech
-              </span>
-              <h2
-                className="font-display text-2xl font-bold text-white mt-0.5"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                Innovation Summit
-              </h2>
-              <p className="text-xs tracking-widest uppercase text-[var(--text-muted)] mt-0.5">
-                {SUMMIT.edition} Edition · {SUMMIT.dateShort}
+            <div className="mb-5">
+              <Image
+                src="/logo.png"
+                alt="3rd BFSI Tech Innovation Summit 2027 Logo"
+                width={220}
+                height={75}
+                className="h-14 w-auto object-contain drop-shadow-[0_0_15px_rgba(0,242,254,0.3)] mb-2"
+              />
+              <p className="text-xs tracking-widest uppercase text-[var(--text-muted)] mt-1">
+                {SUMMIT.edition} Edition · {SUMMIT.dateShort} · Mumbai
               </p>
             </div>
             <p className="text-[var(--text-secondary)] text-sm leading-relaxed max-w-xs mb-6">
