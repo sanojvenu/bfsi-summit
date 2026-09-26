@@ -23,24 +23,24 @@ export function StatStrip() {
 
       <div className="container relative z-10">
 
-        {/* Event stats (GFF Style Ticker Cards) */}
-        <Stagger className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+        {/* Event stats (Clean Light Executive Cards) */}
+        <Stagger className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
           {eventStats.map((stat) => (
             <StaggerItem key={stat.label}>
-              <div className="bg-slate-900/90 border border-slate-800/80 hover:border-cyan-500/30 p-6 md:p-8 rounded-2xl flex flex-col gap-2 h-full shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <div className="bg-white border border-slate-200/80 hover:border-blue-400/50 p-6 md:p-8 rounded-2xl flex flex-col gap-2 h-full shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
                 <span
-                  className="font-display text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 tabular-nums leading-tight"
+                  className="font-display text-4xl sm:text-5xl font-extrabold text-blue-900 tabular-nums leading-tight"
                   aria-label={`${stat.prefix ?? ""}${stat.value}${stat.suffix ?? ""} ${stat.label}`}
                 >
                   {stat.prefix}
                   <AnimatedCounter value={stat.value} duration={1.8} />
                   {stat.suffix}
                 </span>
-                <span className="text-sm font-bold text-slate-100 tracking-wide">
+                <span className="text-sm font-bold text-slate-800 tracking-wide">
                   {stat.label}
                 </span>
                 {stat.description && (
-                  <span className="text-xs text-slate-400 leading-relaxed">
+                  <span className="text-xs text-slate-500 leading-relaxed font-medium">
                     {stat.description}
                   </span>
                 )}

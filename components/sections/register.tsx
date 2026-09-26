@@ -207,7 +207,7 @@ export function RegisterSection() {
             {
               name: "CXO VIP Pass",
               badge: "Invite Only · Complimentary",
-              badgeColor: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+              badgeColor: "bg-blue-50 text-blue-900 border-blue-200",
               forWho: "CIOs, CTOs, CISOs, CDOs, Board Members & MDs",
               features: [
                 "Full access to all Keynotes & Executive Panels",
@@ -220,7 +220,7 @@ export function RegisterSection() {
             {
               name: "Delegate Pass",
               badge: "Practitioners & Leaders",
-              badgeColor: "bg-blue-500/20 text-blue-300 border-blue-500/30",
+              badgeColor: "bg-slate-100 text-slate-800 border-slate-200",
               forWho: "VPs, Directors, Tech Architects & Product Heads",
               features: [
                 "Access to all 12+ Specialized Session Tracks",
@@ -233,7 +233,7 @@ export function RegisterSection() {
             {
               name: "Partner & Sponsor Pass",
               badge: "Solution Providers",
-              badgeColor: "bg-purple-500/20 text-purple-300 border-purple-500/30",
+              badgeColor: "bg-slate-100 text-slate-800 border-slate-200",
               forWho: "Fintechs, Cloud & Security Vendors, Consultancies",
               features: [
                 "Exhibitor Booth / Kiosk in Innovation Showcase",
@@ -247,33 +247,33 @@ export function RegisterSection() {
             <div
               key={pass.name}
               className={cn(
-                "rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 relative",
+                "rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 relative shadow-sm",
                 pass.highlight
-                  ? "bg-slate-900/90 border-2 border-cyan-400/80 shadow-[0_0_30px_rgba(0,229,255,0.2)]"
-                  : "bg-slate-900/60 border border-slate-800 hover:border-slate-700"
+                  ? "bg-white border-2 border-blue-600 shadow-md"
+                  : "bg-white border border-slate-200 hover:border-slate-300"
               )}
             >
               {pass.highlight && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-extrabold text-[10px] tracking-widest uppercase px-3 py-1 rounded-full shadow-md">
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-blue-900 text-white font-extrabold text-[10px] tracking-widest uppercase px-3.5 py-1 rounded-full shadow-sm">
                   Most Popular
                 </div>
               )}
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">
-                  <h3 className="font-bold text-lg text-white">{pass.name}</h3>
+                  <h3 className="font-bold text-lg text-slate-900">{pass.name}</h3>
                 </div>
-                <span className={cn("inline-block text-[11px] font-semibold px-2.5 py-1 rounded-full border mb-4", pass.badgeColor)}>
+                <span className={cn("inline-block text-[11px] font-bold px-2.5 py-1 rounded-full border mb-4", pass.badgeColor)}>
                   {pass.badge}
                 </span>
-                <p className="text-xs text-slate-300 font-medium mb-4 leading-relaxed">
-                  <span className="text-slate-400 block text-[10px] uppercase tracking-wider mb-0.5">Target Audience:</span>
+                <p className="text-xs text-slate-600 font-medium mb-4 leading-relaxed">
+                  <span className="text-slate-400 block text-[10px] font-bold uppercase tracking-wider mb-0.5">Target Audience:</span>
                   {pass.forWho}
                 </p>
-                <div className="h-px bg-slate-800 my-4" />
+                <div className="h-px bg-slate-100 my-4" />
                 <ul className="flex flex-col gap-2.5 mb-6">
                   {pass.features.map((feat) => (
-                    <li key={feat} className="flex items-start gap-2 text-xs text-slate-300">
-                      <span className="text-cyan-400 font-bold mt-0.5">✓</span>
+                    <li key={feat} className="flex items-start gap-2 text-xs text-slate-700 font-medium">
+                      <span className="text-blue-600 font-bold mt-0.5">✓</span>
                       <span>{feat}</span>
                     </li>
                   ))}

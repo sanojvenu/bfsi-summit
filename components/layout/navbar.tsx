@@ -72,10 +72,10 @@ export function Navbar() {
       {/* Desktop / Scrolled Navbar */}
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           scrolled
-            ? "bg-[rgba(6,13,25,0.92)] backdrop-blur-xl border-b border-[rgba(255,255,255,0.08)] py-3 shadow-xl"
-            : "bg-transparent py-5"
+            ? "bg-white/95 backdrop-blur-md border-b border-slate-200 py-3 shadow-sm"
+            : "bg-white/80 backdrop-blur-sm border-b border-slate-100 py-4"
         )}
         role="banner"
       >
@@ -87,13 +87,13 @@ export function Navbar() {
             aria-label="BFSI Tech Innovation Summit 2027 — Home"
             onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
           >
-            <div className="relative h-10 md:h-12 w-auto aspect-[1.5/1] flex items-center">
+            <div className="relative h-10 md:h-11 w-auto aspect-[1.5/1] flex items-center">
               <Image
                 src="/logo.png"
                 alt="3rd BFSI Tech Innovation Summit 2027 Logo"
                 width={180}
                 height={60}
-                className="h-full w-auto object-contain drop-shadow-[0_0_12px_rgba(0,242,254,0.3)] group-hover:scale-105 transition-transform duration-300"
+                className="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-300"
                 priority
               />
             </div>
@@ -101,7 +101,7 @@ export function Navbar() {
 
           {/* Desktop Nav */}
           <nav
-            className="hidden lg:flex items-center gap-6"
+            className="hidden lg:flex items-center gap-7"
             role="navigation"
             aria-label="Main navigation"
           >
@@ -114,10 +114,10 @@ export function Navbar() {
                   href={link.href}
                   onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
                   className={cn(
-                    "text-sm font-medium tracking-wide transition-colors duration-200 relative",
+                    "text-sm font-semibold tracking-wide transition-colors duration-200 relative",
                     isActive
-                      ? "text-[var(--gold-400)]"
-                      : "text-[var(--text-secondary)] hover:text-white"
+                      ? "text-blue-600 font-bold"
+                      : "text-slate-700 hover:text-blue-600"
                   )}
                 >
                   {link.label}

@@ -3,49 +3,47 @@
 
 /* ─── Design Tokens ─────────────────────────────────── */
 :root {
-  /* Core palette — Professional Executive Dark Theme */
-  --navy-950: #060d19;
-  --navy-900: #0a1527;
-  --navy-800: #0f1f38;
-  --navy-700: #15294a;
-  --navy-600: #1d3660;
-  --navy-500: #2563eb;
+  /* Core palette — Clean Light Corporate Theme */
+  --navy-950: #0f172a;
+  --navy-900: #1e3a8a;
+  --navy-800: #1e40af;
+  --navy-700: #2563eb;
+  --navy-600: #3b82f6;
+  --navy-500: #60a5fa;
 
-  /* Brand Logo Palette (Cyan & Electric Blue Accent) */
-  --cyan-500: #00F2FE;
-  --cyan-400: #00E5FF;
-  --cyan-300: #38BDF8;
+  /* Brand Accents */
+  --cyan-500: #0284c7;
+  --cyan-400: #0369a1;
+  --cyan-300: #0e7490;
 
-  --blue-600: #1d4ed8;
+  --blue-600: #1e3a8a;
   --blue-500: #2563eb;
-  --blue-400: #60a5fa;
-
-  --purple-500: #8b5cf6;
-  --purple-400: #a78bfa;
+  --blue-400: #3b82f6;
 
   /* Legacy variable maps for compatibility */
-  --gold-600: #2563eb;
-  --gold-500: #00E5FF;
-  --gold-400: #38BDF8;
-  --gold-300: #70F3FF;
-  --gold-100: #E0F2FE;
+  --gold-600: #1e3a8a;
+  --gold-500: #2563eb;
+  --gold-400: #0284c7;
+  --gold-300: #0369a1;
+  --gold-100: #dbeafe;
 
   --teal-600: #0284c7;
-  --teal-500: #00E5FF;
-  --teal-400: #38BDF8;
-  --teal-300: #70F3FF;
+  --teal-500: #0369a1;
+  --teal-400: #2563eb;
+  --teal-300: #1d4ed8;
 
-  --surface-dark: #060d19;
-  --surface-mid: #0a1527;
-  --surface-card: #0f1f38;
-  --surface-hover: #15294a;
+  /* Surfaces — Clean Light Mode Default */
+  --surface-dark: #f8fafc;
+  --surface-mid: #ffffff;
+  --surface-card: #ffffff;
+  --surface-hover: #f1f5f9;
 
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
   --text-muted: #64748b;
 
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-default: rgba(0, 229, 255, 0.2);
+  --border-subtle: #e2e8f0;
+  --border-default: #cbd5e1;
 
   /* Typography */
   --font-display: 'Playfair Display', Georgia, serif;
@@ -56,21 +54,21 @@
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Spacing / Layout */
-  --section-pad: clamp(3rem, 5.5vw, 5rem);
+  --section-pad: clamp(3.5rem, 6vw, 5.5rem);
   --container-max: 1280px;
 }
 
 /* Light mode overrides */
 .light {
   --surface-dark: #f8fafc;
-  --surface-mid: #f1f5f9;
+  --surface-mid: #ffffff;
   --surface-card: #ffffff;
-  --surface-hover: #e2e8f0;
+  --surface-hover: #f1f5f9;
   --text-primary: #0f172a;
   --text-secondary: #334155;
   --text-muted: #64748b;
-  --border-subtle: rgba(15, 23, 42, 0.08);
-  --border-default: rgba(37, 99, 235, 0.25);
+  --border-subtle: #e2e8f0;
+  --border-default: #cbd5e1;
 }
 
 /* ─── Base Reset & Body ─────────────────────────────── */
@@ -109,30 +107,30 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--navy-950);
+  background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--navy-600);
+  background: #cbd5e1;
   border-radius: 3px;
 }
 
 /* ─── Selection ─────────────────────────────────────── */
 ::selection {
-  background: rgba(37, 99, 235, 0.3);
-  color: #ffffff;
+  background: rgba(37, 99, 235, 0.2);
+  color: #0f172a;
 }
 
 /* ─── Utility Classes ───────────────────────────────── */
 .gold-gradient,
 .brand-gradient {
-  background: linear-gradient(135deg, #00E5FF 0%, #38BDF8 50%, #818CF8 100%);
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #0284c7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .navy-gradient {
-  background: linear-gradient(180deg, var(--navy-950) 0%, var(--surface-mid) 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
 }
 
 .gold-border,
@@ -143,22 +141,20 @@ body {
 .gold-line,
 .brand-line {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, #cbd5e1, transparent);
 }
 
 .card-surface {
-  background: rgba(15, 31, 56, 0.7);
-  border: 1px solid var(--border-subtle);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
   border-radius: 12px;
 }
 
 .card-surface-glass {
-  background: rgba(10, 21, 39, 0.75);
-  border: 1px solid var(--border-subtle);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
   border-radius: 12px;
 }
 
@@ -168,7 +164,7 @@ body {
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.75rem;
-  background: linear-gradient(135deg, #00E5FF 0%, #2563EB 100%);
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
   color: #ffffff;
   font-family: var(--font-body);
   font-weight: 600;
@@ -178,7 +174,7 @@ body {
   border-radius: 8px;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
   transition: all 0.25s var(--ease-premium);
   position: relative;
   overflow: hidden;
@@ -186,7 +182,8 @@ body {
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
+  background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
 }
 
 .btn-primary span {
@@ -199,13 +196,13 @@ body {
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.75rem;
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text-primary);
+  background: #ffffff;
+  color: #0f172a;
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.875rem;
   letter-spacing: 0.02em;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid #cbd5e1;
   border-radius: 8px;
   cursor: pointer;
   text-decoration: none;
@@ -213,9 +210,9 @@ body {
 }
 
 .btn-outline:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(0, 229, 255, 0.4);
-  color: #ffffff;
+  background: #f8fafc;
+  border-color: #2563eb;
+  color: #2563eb;
 }
 
 .btn-outline:hover {

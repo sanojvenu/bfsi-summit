@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, MapPin, ChevronDown } from "lucide-react";
-import { NetworkGraph } from "@/components/ui/network-graph";
+import { ArrowRight, Calendar, MapPin } from "lucide-react";
 import { getCountdown, SUMMIT_DATE, SUMMIT } from "@/lib/utils";
 
 function CountdownUnit({ value, label }: { value: number; label: string }) {
@@ -15,12 +14,12 @@ function CountdownUnit({ value, label }: { value: number; label: string }) {
         initial={{ y: -6, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.2 }}
-        className="text-2xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-cyan-300 tabular-nums leading-none"
+        className="text-2xl sm:text-4xl font-extrabold text-blue-900 tabular-nums leading-none"
         aria-label={`${value} ${label}`}
       >
         {String(value).padStart(2, "0")}
       </motion.span>
-      <span className="text-[10px] font-semibold tracking-widest uppercase text-slate-400 mt-1.5">
+      <span className="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">
         {label}
       </span>
     </div>
@@ -29,7 +28,7 @@ function CountdownUnit({ value, label }: { value: number; label: string }) {
 
 function CountdownSeparator() {
   return (
-    <span className="text-xl sm:text-3xl font-extrabold text-cyan-400/50 pb-4">:</span>
+    <span className="text-xl sm:text-3xl font-extrabold text-blue-400/60 pb-4">:</span>
   );
 }
 
@@ -41,7 +40,7 @@ function CountdownDisplay() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center gap-2 sm:gap-4 py-3 px-6 rounded-2xl bg-slate-900/80 border border-slate-800/80 backdrop-blur-md shadow-xl" role="timer" aria-label="Countdown to summit">
+    <div className="flex items-center justify-center gap-2 sm:gap-4 py-3.5 px-8 rounded-2xl bg-white border border-slate-200 shadow-lg shadow-slate-200/50" role="timer" aria-label="Countdown to summit">
       <CountdownUnit value={countdown.days} label="Days" />
       <CountdownSeparator />
       <CountdownUnit value={countdown.hours} label="Hours" />
@@ -61,23 +60,15 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden py-24"
-      style={{ background: "radial-gradient(ellipse at 50% 30%, #0d1e3a 0%, #060d19 70%)" }}
+      className="relative min-h-[85vh] flex flex-col justify-center overflow-hidden py-24 bg-gradient-to-b from-slate-50 via-white to-slate-50/80 border-b border-slate-200"
       aria-label="BFSI Tech Innovation Summit 2027 Hero"
     >
-      {/* Network graph background */}
-      <div className="absolute inset-0 opacity-30 pointer-events-none" aria-hidden="true">
-        {mounted && (
-          <NetworkGraph nodeCount={50} color="rgba(0,229,255," className="w-full h-full" />
-        )}
-      </div>
-
-      {/* Subtle ambient glow */}
+      {/* Subtle ambient light gradient */}
       <div
         className="absolute pointer-events-none"
         style={{
-          top: "10%", left: "50%", transform: "translateX(-50%)", width: "60%", height: "50%",
-          background: "radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%)",
+          top: "0%", left: "50%", transform: "translateX(-50%)", width: "70%", height: "60%",
+          background: "radial-gradient(ellipse at top, rgba(37,99,235,0.06) 0%, transparent 70%)",
         }}
         aria-hidden="true"
       />
@@ -90,10 +81,10 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 rounded-full border border-cyan-500/30 bg-cyan-500/10 backdrop-blur-md"
+            className="inline-flex items-center gap-2.5 px-4 py-1.5 mb-8 rounded-full border border-blue-200 bg-blue-50/80 shadow-xs"
           >
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-cyan-300">
+            <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+            <span className="text-xs font-bold tracking-wider uppercase text-blue-900">
               {SUMMIT.edition} Annual Edition · {SUMMIT.year} · Mumbai
             </span>
           </motion.div>
@@ -110,7 +101,7 @@ export function HeroSection() {
               alt="3rd BFSI Tech Innovation Summit 2027"
               width={460}
               height={150}
-              className="w-full max-w-sm sm:max-w-md md:max-w-lg h-auto object-contain drop-shadow-[0_0_30px_rgba(0,229,255,0.3)]"
+              className="w-full max-w-sm sm:max-w-md md:max-w-lg h-auto object-contain drop-shadow-md"
               priority
             />
           </motion.div>
@@ -120,7 +111,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-100 max-w-2xl leading-relaxed mb-4"
+            className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 max-w-3xl leading-snug mb-4 font-display"
           >
             India's Premier Technology & AI Leadership Forum for Banking, Financial Services & Insurance
           </motion.h1>
@@ -129,7 +120,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.28 }}
-            className="text-sm sm:text-base text-slate-400 italic mb-8 max-w-xl"
+            className="text-base text-slate-600 italic mb-8 max-w-xl font-medium"
           >
             "{SUMMIT.theme}"
           </motion.p>
@@ -141,12 +132,12 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.35 }}
             className="flex flex-wrap justify-center gap-3 mb-10"
           >
-            <span className="inline-flex items-center gap-2 text-xs font-medium text-slate-300 bg-slate-900/80 border border-slate-800 rounded-lg px-4 py-2 shadow-sm">
-              <Calendar size={14} className="text-cyan-400" />
+            <span className="inline-flex items-center gap-2 text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-lg px-4 py-2.5 shadow-sm">
+              <Calendar size={14} className="text-blue-600" />
               {SUMMIT.date} · {SUMMIT.time}
             </span>
-            <span className="inline-flex items-center gap-2 text-xs font-medium text-slate-300 bg-slate-900/80 border border-slate-800 rounded-lg px-4 py-2 shadow-sm">
-              <MapPin size={14} className="text-cyan-400" />
+            <span className="inline-flex items-center gap-2 text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-lg px-4 py-2.5 shadow-sm">
+              <MapPin size={14} className="text-blue-600" />
               Jio World Convention Centre, Mumbai
             </span>
           </motion.div>
