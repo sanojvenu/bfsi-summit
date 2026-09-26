@@ -225,10 +225,10 @@ export function AgendaSection() {
                 key={track}
                 onClick={() => setActiveTrack(track as TrackType | "All")}
                 className={cn(
-                  "text-xs font-semibold px-3 py-1.5 rounded-full border transition-all duration-200",
+                  "text-xs font-semibold px-3.5 py-1.5 rounded-full border transition-all duration-200",
                   activeTrack === track
-                    ? "bg-[var(--gold-500)] text-[var(--navy-900)] border-[var(--gold-500)]"
-                    : "text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-[var(--border-default)] hover:text-[var(--text-primary)]"
+                    ? "bg-gradient-to-r from-[#00F2FE] via-[#0066FF] to-[#9D00FF] text-white border-transparent shadow-[0_0_12px_rgba(0,242,254,0.3)]"
+                    : "text-[var(--text-secondary)] bg-[rgba(255,255,255,0.03)] border-[rgba(0,229,255,0.18)] hover:border-[var(--cyan-400)] hover:text-white"
                 )}
                 aria-pressed={activeTrack === track}
               >
@@ -241,10 +241,10 @@ export function AgendaSection() {
           <button
             onClick={() => setShowPlannerOnly(!showPlannerOnly)}
             className={cn(
-              "flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border transition-all",
+              "flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-full border transition-all",
               showPlannerOnly
-                ? "bg-[rgba(212,165,75,0.15)] text-[var(--gold-400)] border-[var(--gold-500)]"
-                : "text-[var(--text-muted)] border-[var(--border-subtle)] hover:text-[var(--gold-400)]"
+                ? "bg-[rgba(0,242,254,0.15)] text-[var(--cyan-400)] border-[var(--cyan-400)] shadow-[0_0_12px_rgba(0,242,254,0.25)]"
+                : "text-[var(--text-muted)] border-[rgba(0,229,255,0.18)] hover:text-[var(--cyan-400)] hover:border-[var(--cyan-400)]"
             )}
             aria-pressed={showPlannerOnly}
             id="planner-toggle"

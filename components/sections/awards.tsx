@@ -53,11 +53,11 @@ export function AwardsSection() {
             const Icon = iconMap[cat.icon] ?? Trophy;
             return (
               <StaggerItem key={cat.id}>
-                <div className="card-surface rounded-xl p-5 h-full group hover:border-[var(--gold-500)] transition-all duration-300">
-                  <div className="w-10 h-10 rounded-lg bg-[rgba(212,165,75,0.08)] flex items-center justify-center mb-4 group-hover:bg-[rgba(212,165,75,0.15)] transition-colors">
-                    <Icon size={20} className="text-[var(--gold-400)]" />
+                <div className="card-surface gradient-strip-top rounded-xl p-5 h-full group hover:border-[var(--cyan-400)] transition-all duration-300">
+                  <div className="w-10 h-10 rounded-lg bg-[rgba(0,242,254,0.08)] flex items-center justify-center mb-4 group-hover:bg-[rgba(0,242,254,0.18)] transition-colors">
+                    <Icon size={20} className="text-[var(--cyan-400)]" />
                   </div>
-                  <h3 className="text-sm font-bold text-[var(--text-primary)] mb-2 leading-tight">
+                  <h3 className="text-sm font-bold text-[var(--text-primary)] mb-2 leading-tight group-hover:text-[var(--cyan-300)] transition-colors">
                     {cat.title}
                   </h3>
                   <p className="text-xs text-[var(--text-muted)] leading-relaxed">
@@ -74,7 +74,7 @@ export function AwardsSection() {
           <div className="mb-8 text-center">
             <div className="section-label justify-center">Past Winners · 2025</div>
             <h3 className="font-display text-2xl font-bold text-[var(--text-primary)]" style={{ fontFamily: "var(--font-display)" }}>
-              Award-Winning Initiatives
+              Award-Winning <span className="brand-gradient">Initiatives</span>
             </h3>
           </div>
 
@@ -91,7 +91,7 @@ export function AwardsSection() {
                     className={cn(
                       "flex items-center gap-3 px-4 py-3 rounded-xl border text-left transition-all duration-250 w-full",
                       i === activeWinner
-                        ? "border-[var(--gold-500)] bg-[rgba(212,165,75,0.08)]"
+                        ? "border-[var(--cyan-400)] bg-[rgba(0,242,254,0.08)] shadow-[0_0_15px_rgba(0,242,254,0.15)]"
                         : "border-[var(--border-subtle)] hover:border-[var(--border-default)]"
                     )}
                     aria-pressed={i === activeWinner}
@@ -99,16 +99,16 @@ export function AwardsSection() {
                   >
                     <div className={cn(
                       "w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0",
-                      i === activeWinner ? "bg-[rgba(212,165,75,0.15)]" : "bg-[rgba(255,255,255,0.04)]"
+                      i === activeWinner ? "bg-[rgba(0,242,254,0.18)]" : "bg-[rgba(255,255,255,0.04)]"
                     )}>
-                      <CatIcon size={15} className={i === activeWinner ? "text-[var(--gold-400)]" : "text-[var(--text-muted)]"} />
+                      <CatIcon size={15} className={i === activeWinner ? "text-[var(--cyan-400)]" : "text-[var(--text-muted)]"} />
                     </div>
                     <div className="min-w-0 flex-1">
                       <p className={cn("text-xs font-bold leading-tight truncate", i === activeWinner ? "text-[var(--text-primary)]" : "text-[var(--text-muted)]")}>{w.organization}</p>
                       <p className="text-[10px] text-[var(--text-muted)] leading-tight truncate mt-0.5">{cat?.title}</p>
                     </div>
                     {i === activeWinner && (
-                      <ChevronRight size={14} className="text-[var(--gold-400)] flex-shrink-0" />
+                      <ChevronRight size={14} className="text-[var(--cyan-400)] flex-shrink-0" />
                     )}
                   </button>
                 );
@@ -124,21 +124,21 @@ export function AwardsSection() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -14 }}
                   transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                  className="card-surface rounded-2xl p-6 sm:p-8 h-full"
+                  className="card-surface gradient-strip-top rounded-2xl p-6 sm:p-8 h-full"
                 >
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[rgba(212,165,75,0.08)] border border-[var(--border-subtle)] mb-5">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[rgba(0,242,254,0.08)] border border-[rgba(0,229,255,0.2)] mb-5">
                     {category && (() => {
                       const Icon = iconMap[category.icon] ?? Trophy;
-                      return <Icon size={13} className="text-[var(--gold-400)]" />;
+                      return <Icon size={13} className="text-[var(--cyan-400)]" />;
                     })()}
-                    <span className="text-xs font-semibold text-[var(--gold-400)] tracking-wide">{category?.title}</span>
+                    <span className="text-xs font-semibold text-[var(--cyan-400)] tracking-wide">{category?.title}</span>
                   </div>
                   <h4 className="font-display text-2xl sm:text-3xl font-bold text-[var(--text-primary)] leading-tight mb-2" style={{ fontFamily: "var(--font-display)" }}>
                     {winner.organization}
                   </h4>
-                  <p className="text-sm font-medium text-[var(--gold-400)] mb-4 italic">{winner.projectTitle}</p>
+                  <p className="text-sm font-medium text-[var(--cyan-300)] mb-4 italic">{winner.projectTitle}</p>
                   <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-5">{winner.excerpt}</p>
-                  <span className="inline-flex items-center gap-1.5 text-xs text-[var(--text-muted)] px-3 py-1.5 rounded-full border border-[var(--border-subtle)]">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--cyan-400)] px-3 py-1.5 rounded-full border border-[rgba(0,229,255,0.2)] bg-[rgba(0,242,254,0.05)]">
                     🏆 Winner {winner.year}
                   </span>
                 </motion.div>

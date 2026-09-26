@@ -127,7 +127,7 @@ body {
 /* ─── Utility Classes ───────────────────────────────── */
 .gold-gradient,
 .brand-gradient {
-  background: linear-gradient(135deg, #00F2FE 0%, #38BDF8 40%, #A855F7 75%, #E000FF 100%);
+  background: linear-gradient(135deg, #00F2FE 0%, #38BDF8 35%, #A855F7 70%, #E000FF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -145,23 +145,56 @@ body {
 .gold-line,
 .brand-line {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.4), rgba(224, 0, 255, 0.4), transparent);
 }
 
 .card-surface {
-  background: rgba(15, 29, 58, 0.7);
-  border: 1px solid var(--border-subtle);
+  background: rgba(13, 25, 50, 0.75);
+  border: 1px solid rgba(0, 229, 255, 0.15);
   backdrop-filter: blur(14px);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   border-radius: 14px;
+  transition: transform 0.3s var(--ease-premium), box-shadow 0.3s var(--ease-premium), border-color 0.3s ease;
+}
+
+.card-surface:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 229, 255, 0.4);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 20px rgba(0, 242, 254, 0.15);
 }
 
 .card-surface-glass {
-  background: rgba(9, 19, 38, 0.8);
-  border: 1px solid var(--border-subtle);
+  background: rgba(9, 19, 38, 0.85);
+  border: 1px solid rgba(0, 229, 255, 0.18);
   backdrop-filter: blur(16px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   border-radius: 14px;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* Gradient top accent strip */
+.gradient-strip-top {
+  position: relative;
+  overflow: hidden;
+}
+
+.gradient-strip-top::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #00F2FE 0%, #0066FF 50%, #E000FF 100%);
 }
 
 /* ─── Button Styles ─────────────────────────────────── */
@@ -169,7 +202,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.75rem;
+  padding: 0.8rem 1.85rem;
   background: linear-gradient(135deg, #00F2FE 0%, #0066FF 50%, #9D00FF 100%);
   color: #ffffff;
   font-family: var(--font-body);
@@ -181,7 +214,7 @@ body {
   border-radius: 8px;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 4px 20px rgba(0, 242, 254, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 242, 254, 0.3), 0 0 15px rgba(224, 0, 255, 0.2);
   transition: all 0.3s var(--ease-premium);
   position: relative;
   overflow: hidden;
@@ -189,7 +222,7 @@ body {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 242, 254, 0.4), 0 0 15px rgba(224, 0, 255, 0.3);
+  box-shadow: 0 8px 30px rgba(0, 242, 254, 0.45), 0 0 25px rgba(224, 0, 255, 0.35);
 }
 
 .btn-primary span {

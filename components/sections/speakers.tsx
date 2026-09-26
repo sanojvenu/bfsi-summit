@@ -95,12 +95,12 @@ function SpeakerModal({ speaker }: { speaker: Speaker }) {
                 </h3>
                 <div className="flex flex-wrap items-center gap-2 mb-2">
                   <span className={cn(
-                    "text-[10px] border rounded-full px-2 py-0.5 font-semibold uppercase tracking-wider",
+                    "text-[10px] border rounded-full px-2.5 py-0.5 font-semibold uppercase tracking-wider",
                     trackColors[session.track]
                   )}>
                     {session.track}
                   </span>
-                  <span className="text-xs text-[var(--gold-400)]">
+                  <span className="text-xs font-semibold text-[#00E5FF]">
                     {session.time.replace(":", ":")} AM–
                     {session.endTime}
                   </span>
@@ -128,23 +128,16 @@ function SpeakerCard({ speaker }: { speaker: Speaker }) {
     <Dialog.Root>
       <Dialog.Trigger asChild>
         <button
-          className="speaker-card card-surface rounded-xl text-left w-full group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold-500)] overflow-hidden"
+          className="speaker-card card-surface gradient-strip-top rounded-xl text-left w-full group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cyan-400)] overflow-hidden"
           aria-label={`View ${speaker.name}'s profile`}
           id={`speaker-card-${speaker.id}`}
         >
-          {/* Colored top accent bar */}
-          <div
-            className="h-1 w-full"
-            style={{ background: speaker.avatarColor }}
-            aria-hidden="true"
-          />
-
           <div className="p-5">
             <div className="flex items-start gap-4 mb-4">
               {/* Avatar with glow */}
               <div className="relative flex-shrink-0">
                 <div
-                  className="w-14 h-14 rounded-full flex items-center justify-center text-sm font-bold text-white"
+                  className="w-14 h-14 rounded-full flex items-center justify-center text-sm font-bold text-white shadow-md"
                   style={{ background: speaker.avatarColor }}
                   aria-hidden="true"
                 >
@@ -152,31 +145,31 @@ function SpeakerCard({ speaker }: { speaker: Speaker }) {
                 </div>
                 <div
                   className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-400"
-                  style={{ boxShadow: `0 0 20px ${speaker.avatarColor}55` }}
+                  style={{ boxShadow: `0 0 20px ${speaker.avatarColor}77` }}
                   aria-hidden="true"
                 />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-sm font-bold text-[var(--text-primary)] leading-tight">
+                <h3 className="text-sm font-bold text-[var(--text-primary)] leading-tight group-hover:text-[var(--cyan-400)] transition-colors">
                   {speaker.name}
                 </h3>
-                <p className="text-xs text-[var(--gold-400)] mt-0.5 leading-snug">{speaker.title}</p>
+                <p className="text-xs text-[var(--cyan-300)] mt-0.5 leading-snug font-medium">{speaker.title}</p>
                 <p className="text-xs text-[var(--text-muted)] mt-0.5 truncate">{speaker.company}</p>
               </div>
             </div>
 
             {speaker.sessionTitle && (
-              <div className="border-t border-[var(--border-subtle)] pt-3">
+              <div className="border-t border-[rgba(0,229,255,0.12)] pt-3">
                 <p className="text-[10px] font-semibold tracking-wide uppercase text-[var(--text-muted)] mb-1">
                   Speaking on
                 </p>
-                <p className="text-xs text-[var(--text-secondary)] line-clamp-2 leading-relaxed">
+                <p className="text-xs text-[var(--text-secondary)] line-clamp-2 leading-relaxed font-normal">
                   {speaker.sessionTitle}
                 </p>
               </div>
             )}
 
-            <div className="flex items-center gap-1 mt-3 text-[10px] font-semibold text-[var(--teal-400)] opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="flex items-center gap-1 mt-3 text-[10px] font-semibold text-[var(--cyan-400)] opacity-70 group-hover:opacity-100 transition-opacity">
               View full profile <ChevronRight size={10} />
             </div>
           </div>
@@ -197,7 +190,7 @@ export function SpeakersSection() {
   return (
     <section
       id="speakers"
-      className="section"
+      className="section relative overflow-hidden"
       style={{ background: "var(--surface-dark)" }}
       aria-labelledby="speakers-heading"
     >
@@ -206,7 +199,7 @@ export function SpeakersSection() {
           <div className="section-label justify-center">Speakers & Thought Leaders</div>
           <h2 id="speakers-heading" className="section-title text-center">
             Learn From{" "}
-            <span className="gold-gradient">Operators, Not Pundits</span>
+            <span className="brand-gradient">Operators, Not Pundits</span>
           </h2>
           <p className="section-subtitle mx-auto text-center">
             Every speaker at the Summit is a practitioner — a CXO or senior leader who has done the work, shipped the product, and can show you the results.
@@ -215,9 +208,9 @@ export function SpeakersSection() {
 
         {/* Featured speakers */}
         {featured.length > 0 && (
-          <div className="mb-4">
-            <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--gold-500)] mb-5 flex items-center gap-2">
-              <span className="w-4 h-px bg-[var(--gold-500)]" />
+          <div className="mb-8">
+            <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--cyan-400)] mb-5 flex items-center gap-2">
+              <span className="w-4 h-px bg-gradient-to-r from-[#00F2FE] to-[#E000FF]" />
               Featured Speakers
             </h3>
             <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
@@ -233,8 +226,8 @@ export function SpeakersSection() {
         {/* All speakers */}
         {rest.length > 0 && (
           <div>
-            <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--gold-500)] mb-5 flex items-center gap-2">
-              <span className="w-4 h-px bg-[var(--gold-500)]" />
+            <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--cyan-400)] mb-5 flex items-center gap-2">
+              <span className="w-4 h-px bg-gradient-to-r from-[#00F2FE] to-[#E000FF]" />
               Also Speaking
             </h3>
             <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
