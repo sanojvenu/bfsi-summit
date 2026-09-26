@@ -192,17 +192,113 @@ export function RegisterSection() {
 
       <div className="container relative z-10">
         <FadeIn className="text-center mb-12">
-          <div className="section-label justify-center">Invite-Only Event</div>
+          <div className="section-label justify-center">Registration & Delegate Passes</div>
           <h2 id="register-heading" className="section-title text-center">
-            Request an{" "}
-            <span className="gold-gradient">Invitation</span>
+            Choose Your <span className="gold-gradient">Summit Pass</span>
           </h2>
           <p className="section-subtitle mx-auto text-center">
-            The {SUMMIT.name} is curated for senior technology and innovation leaders. Complete the form below and our team will review your application.
+            The {SUMMIT.name} is curated for senior technology and innovation leaders across banking, financial services, and insurance. Select your pass tier below to request an invitation.
           </p>
         </FadeIn>
 
-        <div className="max-w-2xl mx-auto">
+        {/* GFF-style Delegate Pass Tiers Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 max-w-5xl mx-auto">
+          {[
+            {
+              name: "CXO VIP Pass",
+              badge: "Invite Only · Complimentary",
+              badgeColor: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+              forWho: "CIOs, CTOs, CISOs, CDOs, Board Members & MDs",
+              features: [
+                "Full access to all Keynotes & Executive Panels",
+                "Exclusive CXO VIP Networking Lounge & Breakfast",
+                "Invitation to BFSI Innovation Awards Gala Dinner",
+                "1-on-1 Curated Peer Matchmaking & Roundtables",
+              ],
+              highlight: true,
+            },
+            {
+              name: "Delegate Pass",
+              badge: "Practitioners & Leaders",
+              badgeColor: "bg-blue-500/20 text-blue-300 border-blue-500/30",
+              forWho: "VPs, Directors, Tech Architects & Product Heads",
+              features: [
+                "Access to all 12+ Specialized Session Tracks",
+                "Networking Lunch & Refreshment Breaks",
+                "Access to Tech Innovation Exhibition Area",
+                "Digital Delegate Kit & Post-Event Report",
+              ],
+              highlight: false,
+            },
+            {
+              name: "Partner & Sponsor Pass",
+              badge: "Solution Providers",
+              badgeColor: "bg-purple-500/20 text-purple-300 border-purple-500/30",
+              forWho: "Fintechs, Cloud & Security Vendors, Consultancies",
+              features: [
+                "Exhibitor Booth / Kiosk in Innovation Showcase",
+                "2 Full Conference & VIP Gala Passes",
+                "Brand Placement in Summit Collateral & PR",
+                "Access to Attendees Lead Capture Portal",
+              ],
+              highlight: false,
+            },
+          ].map((pass) => (
+            <div
+              key={pass.name}
+              className={cn(
+                "rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 relative",
+                pass.highlight
+                  ? "bg-slate-900/90 border-2 border-cyan-400/80 shadow-[0_0_30px_rgba(0,229,255,0.2)]"
+                  : "bg-slate-900/60 border border-slate-800 hover:border-slate-700"
+              )}
+            >
+              {pass.highlight && (
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-extrabold text-[10px] tracking-widest uppercase px-3 py-1 rounded-full shadow-md">
+                  Most Popular
+                </div>
+              )}
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <h3 className="font-bold text-lg text-white">{pass.name}</h3>
+                </div>
+                <span className={cn("inline-block text-[11px] font-semibold px-2.5 py-1 rounded-full border mb-4", pass.badgeColor)}>
+                  {pass.badge}
+                </span>
+                <p className="text-xs text-slate-300 font-medium mb-4 leading-relaxed">
+                  <span className="text-slate-400 block text-[10px] uppercase tracking-wider mb-0.5">Target Audience:</span>
+                  {pass.forWho}
+                </p>
+                <div className="h-px bg-slate-800 my-4" />
+                <ul className="flex flex-col gap-2.5 mb-6">
+                  {pass.features.map((feat) => (
+                    <li key={feat} className="flex items-start gap-2 text-xs text-slate-300">
+                      <span className="text-cyan-400 font-bold mt-0.5">✓</span>
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <a
+                href="#register-form"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById("register-form")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className={cn(
+                  "w-full text-center py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all",
+                  pass.highlight
+                    ? "btn-primary"
+                    : "btn-outline"
+                )}
+              >
+                Apply for {pass.name}
+              </a>
+            </div>
+          ))}
+        </div>
+
+        <div id="register-form" className="max-w-2xl mx-auto pt-4">
 
           {/* Progress bar */}
           <div className="mb-8">

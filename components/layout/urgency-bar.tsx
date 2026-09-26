@@ -1,78 +1,65 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { X, Clock } from "lucide-react";
-import { getCountdown, SUMMIT_DATE, SUMMIT } from "@/lib/utils";
+import { Calendar, MapPin, ArrowRight, X } from "lucide-react";
+import { SUMMIT } from "@/lib/utils";
 
 export function UrgencyBar() {
-  const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
-  const [days, setDays] = useState(0);
 
   useEffect(() => {
-    // Check if previously dismissed
-    const wasDismissed = sessionStorage.getItem("urgency-bar-dismissed");
-    if (wasDismissed) return;
-
-    const update = () => {
-      const ct = getCountdown(SUMMIT_DATE);
-      setDays(ct.days);
-      // Show when ≤ 90 days away
-      if (ct.days <= 90 && ct.total > 0) setVisible(true);
-    };
-
-    update();
-    const timer = setInterval(update, 60000);
-    return () => clearInterval(timer);
+    const wasDismissed = sessionStorage.getItem("gff-urgency-dismissed");
+    if (wasDismissed) setDismissed(true);
   }, []);
 
   const handleDismiss = () => {
     setDismissed(true);
-    sessionStorage.setItem("urgency-bar-dismissed", "1");
+    sessionStorage.setItem("gff-urgency-dismissed", "1");
   };
 
-  if (dismissed || !visible) return null;
+  if (dismissed) return null;
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ height: 0, opacity: 0 }}
-        animate={{ height: "auto", opacity: 1 }}
-        exit={{ height: 0, opacity: 0 }}
-        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="urgency-bar overflow-hidden no-print"
-        role="alert"
-        aria-live="polite"
-      >
-        <div className="container flex items-center justify-between py-2 gap-4">
-          <div className="flex items-center gap-2 text-xs sm:text-sm text-[var(--text-primary)]">
-            <Clock size={14} className="text-[var(--gold-400)] flex-shrink-0" />
-            <span>
-              <span className="font-bold text-[var(--gold-400)]">{days} days</span>
-              {" "}to the {SUMMIT.edition} {SUMMIT.name} ·{" "}
-              <a
-                href="#register"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("register")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="underline underline-offset-2 hover:text-[var(--gold-300)] transition-colors"
-              >
-                Secure your seat →
-              </a>
-            </span>
-          </div>
+    <div className="bg-gradient-to-r from-slate-950 via-blue-950 to-slate-950 border-b border-blue-500/20 text-white text-xs font-medium py-2 px-4 relative z-50">
+      <div className="container flex items-center justify-between gap-4">
+        <div className="flex items-center gap-4 flex-wrap">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-500/20 text-cyan-300 font-semibold text-[11px] uppercase tracking-wider">
+            {SUMMIT.edition} Edition
+          </span>
+          <span className="hidden sm:inline-flex items-center gap-1.5 text-slate-300">
+            <Calendar size={12} className="text-cyan-400" />
+            {SUMMIT.dateShort} · {SUMMIT.year}
+          </span>
+          <span className="hidden md:inline-flex items-center gap-1.5 text-slate-300">
+            <MapPin size={12} className="text-cyan-400" />
+            {SUMMIT.venue}, {SUMMIT.city}
+          </span>
+          <span className="text-slate-200 font-semibold hidden lg:inline">
+            "{SUMMIT.theme}"
+          </span>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <a
+            href="#register"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("register")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="inline-flex items-center gap-1 text-cyan-300 hover:text-white font-semibold transition-colors group"
+          >
+            <span>Request Pass</span>
+            <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+          </a>
           <button
             onClick={handleDismiss}
-            aria-label="Dismiss urgency bar"
-            className="text-[var(--text-muted)] hover:text-white transition-colors flex-shrink-0"
-            id="urgency-bar-dismiss"
+            className="text-slate-400 hover:text-white p-1 rounded transition-colors"
+            aria-label="Dismiss announcement"
           >
             <X size={14} />
           </button>
         </div>
-      </motion.div>
-    </AnimatePresence>
+      </div>
+    </div>
   );
 }
