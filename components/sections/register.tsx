@@ -1,0 +1,399 @@
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FadeIn } from "@/components/ui/animations";
+import { CheckCircle, ArrowRight, ArrowLeft, Loader } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { SUMMIT } from "@/lib/utils";
+
+const STEPS = [
+  {
+    id: 1,
+    title: "Your Details",
+    description: "Tell us about yourself",
+    fields: [
+      { id: "firstName", label: "First Name", type: "text", placeholder: "Rajesh", required: true },
+      { id: "lastName", label: "Last Name", type: "text", placeholder: "Sharma", required: true },
+      { id: "email", label: "Work Email", type: "email", placeholder: "r.sharma@bank.com", required: true },
+      { id: "phone", label: "Mobile Number", type: "tel", placeholder: "+91 98765 43210", required: true },
+    ],
+  },
+  {
+    id: 2,
+    title: "Your Organisation",
+    description: "Help us understand your context",
+    fields: [
+      { id: "company", label: "Organisation / Company", type: "text", placeholder: "State Bank of India", required: true },
+      {
+        id: "sector",
+        label: "Sector",
+        type: "select",
+        options: [
+          "Public Sector Bank",
+          "Private Sector Bank",
+          "Insurance Company",
+          "NBFC / Fintech",
+          "Capital Markets / MF",
+          "Regulatory Body",
+          "Technology / Services",
+          "Other",
+        ],
+        placeholder: "Select your sector",
+        required: true,
+      },
+      { id: "title", label: "Job Title / Designation", type: "text", placeholder: "Chief Digital Officer", required: true },
+      {
+        id: "seniority",
+        label: "Seniority Level",
+        type: "select",
+        options: ["C-Suite / CEO / MD", "VP / SVP / EVP", "Director / Head of", "Senior Manager", "Other"],
+        placeholder: "Select level",
+        required: true,
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "Your Interests",
+    description: "Help us personalise your experience",
+    fields: [
+      {
+        id: "tracks",
+        label: "Preferred Session Tracks (select all that apply)",
+        type: "checkboxes",
+        options: [
+          "AI & ML in Banking",
+          "Cybersecurity & Resilience",
+          "Digital Payments & Open Finance",
+          "RegTech & DPDPA Compliance",
+          "Cloud & Core Modernisation",
+          "InsurTech & Embedded Finance",
+        ],
+        required: false,
+      },
+      { id: "message", label: "Anything specific you'd like to discuss or explore at the Summit?", type: "textarea", placeholder: "Optional — but helps us facilitate relevant connections for you.", required: false },
+      {
+        id: "newsletter",
+        label: "Keep me updated with Summit news and BFSI industry insights",
+        type: "checkbox-single",
+        required: false,
+      },
+    ],
+  },
+];
+
+interface FormState {
+  [key: string]: string | string[] | boolean;
+}
+
+interface FieldErrors {
+  [key: string]: string;
+}
+
+export function RegisterSection() {
+  const [step, setStep] = useState(0);
+  const [form, setForm] = useState<FormState>({});
+  const [errors, setErrors] = useState<FieldErrors>({});
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const currentStep = STEPS[step];
+  const progress = ((step + 1) / STEPS.length) * 100;
+
+  const validate = (): boolean => {
+    const newErrors: FieldErrors = {};
+    for (const field of currentStep.fields) {
+      if (field.required) {
+        const val = form[field.id];
+        if (!val || (Array.isArray(val) && val.length === 0) || val === "") {
+          newErrors[field.id] = "This field is required";
+        }
+        if (field.type === "email" && val && typeof val === "string") {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(val)) newErrors[field.id] = "Please enter a valid email address";
+        }
+      }
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleNext = () => {
+    if (!validate()) return;
+    if (step < STEPS.length - 1) {
+      setStep((s) => s + 1);
+      setErrors({});
+    } else {
+      handleSubmit();
+    }
+  };
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    // Stub: simulate network request
+    await new Promise((res) => setTimeout(res, 1800));
+    setLoading(false);
+    setSubmitted(true);
+  };
+
+  const updateField = (id: string, value: string | boolean) => {
+    setForm((prev) => ({ ...prev, [id]: value }));
+    if (errors[id]) setErrors((prev) => { const n = { ...prev }; delete n[id]; return n; });
+  };
+
+  const toggleCheckbox = (id: string, option: string) => {
+    setForm((prev) => {
+      const current = (prev[id] as string[]) ?? [];
+      const updated = current.includes(option)
+        ? current.filter((o) => o !== option)
+        : [...current, option];
+      return { ...prev, [id]: updated };
+    });
+  };
+
+  if (submitted) {
+    return (
+      <section id="register" className="section" style={{ background: "var(--surface-dark)" }} aria-label="Registration confirmation">
+        <div className="container flex items-center justify-center py-20">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="card-surface rounded-2xl p-10 sm:p-14 max-w-lg w-full text-center"
+          >
+            <div className="w-16 h-16 rounded-full bg-[rgba(52,211,153,0.1)] flex items-center justify-center mx-auto mb-6">
+              <CheckCircle size={32} className="text-emerald-400" />
+            </div>
+            <h2 className="font-display text-2xl sm:text-3xl font-bold text-[var(--text-primary)] mb-3" style={{ fontFamily: "var(--font-display)" }}>
+              Request Received
+            </h2>
+            <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-6">
+              Thank you for your interest in the {SUMMIT.edition} {SUMMIT.name}. Our team reviews all applications and will respond within 5 business days.
+            </p>
+            <p className="text-xs text-[var(--text-muted)]">
+              A confirmation has been sent to <span className="text-[var(--gold-400)]">{form.email as string}</span>
+            </p>
+          </motion.div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section
+      id="register"
+      className="section relative overflow-hidden"
+      style={{ background: "var(--surface-dark)" }}
+      aria-labelledby="register-heading"
+    >
+      {/* Decorative background */}
+      <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" aria-hidden="true" />
+
+      <div className="container relative z-10">
+        <FadeIn className="text-center mb-12">
+          <div className="section-label justify-center">Invite-Only Event</div>
+          <h2 id="register-heading" className="section-title text-center">
+            Request an{" "}
+            <span className="gold-gradient">Invitation</span>
+          </h2>
+          <p className="section-subtitle mx-auto text-center">
+            The {SUMMIT.name} is curated for senior technology and innovation leaders. Complete the form below and our team will review your application.
+          </p>
+        </FadeIn>
+
+        <div className="max-w-2xl mx-auto">
+
+          {/* Progress bar */}
+          <div className="mb-8">
+            <div className="flex justify-between mb-2">
+              {STEPS.map((s, i) => (
+                <div key={s.id} className="flex flex-col items-center gap-1">
+                  <div className={cn(
+                    "w-7 h-7 rounded-full border-2 flex items-center justify-center text-xs font-bold transition-all duration-400",
+                    i < step
+                      ? "bg-[var(--gold-500)] border-[var(--gold-500)] text-[var(--navy-900)]"
+                      : i === step
+                        ? "border-[var(--gold-500)] text-[var(--gold-400)]"
+                        : "border-[var(--border-subtle)] text-[var(--text-muted)]"
+                  )}>
+                    {i < step ? "✓" : i + 1}
+                  </div>
+                  <span className={cn(
+                    "text-[9px] tracking-widest uppercase hidden sm:block",
+                    i === step ? "text-[var(--gold-400)]" : "text-[var(--text-muted)]"
+                  )}>
+                    {s.title}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <div className="relative h-1 bg-[var(--border-subtle)] rounded-full overflow-hidden">
+              <motion.div
+                className="absolute inset-y-0 left-0 rounded-full"
+                style={{ background: "linear-gradient(90deg, var(--gold-600), var(--gold-400))" }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              />
+            </div>
+          </div>
+
+          {/* Step card */}
+          <div className="card-surface rounded-2xl p-6 sm:p-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={step}
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -30 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className="mb-6">
+                  <h3 className="font-semibold text-lg text-[var(--text-primary)]">
+                    {currentStep.title}
+                  </h3>
+                  <p className="text-xs text-[var(--text-muted)]">{currentStep.description}</p>
+                </div>
+
+                <div className="flex flex-col gap-5">
+                  {currentStep.fields.map((field) => (
+                    <div key={field.id}>
+                      <label htmlFor={`field-${field.id}`} className="form-label">
+                        {field.label}
+                        {field.required && <span className="text-[var(--gold-400)] ml-0.5">*</span>}
+                      </label>
+
+                      {field.type === "textarea" ? (
+                        <textarea
+                          id={`field-${field.id}`}
+                          className="form-input min-h-[100px] resize-none"
+                          placeholder={field.placeholder}
+                          value={(form[field.id] as string) ?? ""}
+                          onChange={(e) => updateField(field.id, e.target.value)}
+                          aria-invalid={!!errors[field.id]}
+                          aria-describedby={errors[field.id] ? `error-${field.id}` : undefined}
+                        />
+                      ) : field.type === "select" ? (
+                        <select
+                          id={`field-${field.id}`}
+                          className="form-input"
+                          value={(form[field.id] as string) ?? ""}
+                          onChange={(e) => updateField(field.id, e.target.value)}
+                          aria-invalid={!!errors[field.id]}
+                        >
+                          <option value="">{field.placeholder}</option>
+                          {field.options?.map((opt) => (
+                            <option key={opt} value={opt}>{opt}</option>
+                          ))}
+                        </select>
+                      ) : field.type === "checkboxes" ? (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
+                          {field.options?.map((opt) => {
+                            const checked = ((form[field.id] as string[]) ?? []).includes(opt);
+                            return (
+                              <label
+                                key={opt}
+                                className={cn(
+                                  "flex items-center gap-2.5 px-3 py-2.5 rounded-lg border cursor-pointer transition-all duration-200 text-xs",
+                                  checked
+                                    ? "border-[var(--gold-500)] bg-[rgba(212,165,75,0.08)] text-[var(--gold-300)]"
+                                    : "border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--border-default)]"
+                                )}
+                              >
+                                <input
+                                  type="checkbox"
+                                  className="sr-only"
+                                  checked={checked}
+                                  onChange={() => toggleCheckbox(field.id, opt)}
+                                />
+                                <span className={cn(
+                                  "w-4 h-4 rounded border-2 flex items-center justify-center flex-shrink-0",
+                                  checked ? "border-[var(--gold-400)] bg-[var(--gold-400)]" : "border-[var(--border-default)]"
+                                )}>
+                                  {checked && <span className="text-[var(--navy-900)] text-[9px] font-black">✓</span>}
+                                </span>
+                                {opt}
+                              </label>
+                            );
+                          })}
+                        </div>
+                      ) : field.type === "checkbox-single" ? (
+                        <label className="flex items-start gap-3 cursor-pointer mt-1">
+                          <div
+                            className={cn(
+                              "w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-all",
+                              form[field.id]
+                                ? "border-[var(--gold-400)] bg-[var(--gold-400)]"
+                                : "border-[var(--border-default)]"
+                            )}
+                            onClick={() => updateField(field.id, !form[field.id])}
+                          >
+                            {form[field.id] && <span className="text-[var(--navy-900)] text-[10px] font-black">✓</span>}
+                          </div>
+                          <span className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                            {field.label}
+                          </span>
+                        </label>
+                      ) : (
+                        <input
+                          id={`field-${field.id}`}
+                          type={field.type}
+                          className="form-input"
+                          placeholder={field.placeholder}
+                          value={(form[field.id] as string) ?? ""}
+                          onChange={(e) => updateField(field.id, e.target.value)}
+                          aria-invalid={!!errors[field.id]}
+                          aria-describedby={errors[field.id] ? `error-${field.id}` : undefined}
+                          required={field.required}
+                        />
+                      )}
+
+                      {errors[field.id] && (
+                        <p id={`error-${field.id}`} className="text-xs text-red-400 mt-1" role="alert">
+                          {errors[field.id]}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Navigation */}
+            <div className="flex gap-3 mt-8">
+              {step > 0 && (
+                <button
+                  onClick={() => setStep((s) => s - 1)}
+                  className="btn-outline flex-shrink-0"
+                  id="register-back"
+                  disabled={loading}
+                >
+                  <ArrowLeft size={15} />
+                  <span>Back</span>
+                </button>
+              )}
+              <button
+                onClick={handleNext}
+                className="btn-primary flex-1 justify-center"
+                id="register-next"
+                disabled={loading}
+              >
+                {loading ? (
+                  <><Loader size={15} className="animate-spin" /><span>Submitting...</span></>
+                ) : step === STEPS.length - 1 ? (
+                  <><span>Submit Application</span><CheckCircle size={15} /></>
+                ) : (
+                  <><span>Continue</span><ArrowRight size={15} /></>
+                )}
+              </button>
+            </div>
+
+            <p className="text-[10px] text-[var(--text-muted)] text-center mt-4">
+              Your data is handled in accordance with India's DPDPA 2023. We will never sell or share your information with third parties without consent.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
