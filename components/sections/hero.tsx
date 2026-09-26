@@ -55,7 +55,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden pt-20 pb-8"
+      className="relative min-h-[calc(100vh-4rem)] lg:h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden pt-16 pb-4"
       style={{ background: "radial-gradient(ellipse at 30% 30%, #0d1e3a 0%, #050b14 80%)" }}
       aria-label="BFSI Tech Innovation Summit 2027 Hero"
     >
@@ -95,7 +95,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-1.5 px-3 py-0.5 mb-3 rounded-full border border-[rgba(0,242,254,0.35)] bg-[rgba(0,242,254,0.08)] backdrop-blur-md"
+              className="inline-flex items-center gap-1.5 px-3 py-0.5 mb-2.5 rounded-full border border-[rgba(0,242,254,0.35)] bg-[rgba(0,242,254,0.08)] backdrop-blur-md"
             >
               <Sparkles size={12} className="text-cyan-400" />
               <span className="text-[10px] font-semibold tracking-wider uppercase text-cyan-300">
@@ -108,7 +108,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.08 }}
-              className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-2.5 font-display"
+              className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-2 font-display"
             >
               India's Premier Technology & AI Forum for{" "}
               <span className="brand-gradient">Banking, FS & Insurance</span>
@@ -119,7 +119,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.15 }}
-              className="text-xs sm:text-sm text-slate-300 italic mb-4 font-medium leading-relaxed max-w-xl"
+              className="text-xs sm:text-sm text-slate-300 italic mb-3 font-medium leading-relaxed max-w-xl"
             >
               "{SUMMIT.theme}"
             </motion.p>
@@ -129,7 +129,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="flex flex-wrap items-center gap-2 mb-5"
+              className="flex flex-wrap items-center gap-2 mb-4"
             >
               <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-200 bg-slate-900/90 border border-slate-800 rounded-lg px-3 py-1 shadow-sm">
                 <Calendar size={12} className="text-cyan-400" />
@@ -146,7 +146,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.25 }}
-              className="flex flex-wrap items-center gap-2.5 mb-5"
+              className="flex flex-wrap items-center gap-2.5 mb-4"
             >
               <a
                 href="#register"
@@ -191,44 +191,44 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="lg:col-span-5"
           >
-            <div className="card-surface gradient-strip-top rounded-xl p-4 sm:p-5 relative overflow-hidden shadow-xl border border-[rgba(0,229,255,0.22)] bg-[rgba(9,19,38,0.85)]">
+            <div className="card-surface gradient-strip-top rounded-xl p-3.5 sm:p-4.5 relative overflow-hidden shadow-xl border border-[rgba(0,229,255,0.22)] bg-[rgba(9,19,38,0.85)]">
               
               {/* Logo Presentation Frame */}
-              <div className="flex justify-center p-3 rounded-lg bg-slate-950/70 border border-slate-800/80 mb-4 shadow-inner">
+              <div className="flex justify-center p-2.5 rounded-lg bg-slate-950/70 border border-slate-800/80 mb-3 shadow-inner">
                 <Image
                   src="/logo.png"
                   alt="3rd BFSI Tech Innovation Summit 2027"
-                  width={280}
-                  height={90}
-                  className="w-full max-w-[210px] sm:max-w-[230px] h-auto object-contain drop-shadow-[0_0_18px_rgba(0,242,254,0.35)]"
+                  width={260}
+                  height={80}
+                  className="w-full max-w-[190px] sm:max-w-[210px] h-auto object-contain drop-shadow-[0_0_15px_rgba(0,242,254,0.35)]"
                   priority
                 />
               </div>
 
               {/* Quick Summit Stats Grid */}
-              <div className="grid grid-cols-2 gap-2 mb-3.5">
-                <div className="bg-slate-900/80 border border-slate-800/90 rounded-lg p-2.5 text-left">
+              <div className="grid grid-cols-2 gap-2 mb-3">
+                <div className="bg-slate-900/80 border border-slate-800/90 rounded-lg p-2 text-left">
                   <div className="flex items-center gap-1 text-cyan-400 text-xs font-semibold mb-0.5">
                     <Users size={12} />
                     <span>150+</span>
                   </div>
                   <p className="text-[9px] text-slate-400 font-medium">CXO Decision Makers</p>
                 </div>
-                <div className="bg-slate-900/80 border border-slate-800/90 rounded-lg p-2.5 text-left">
+                <div className="bg-slate-900/80 border border-slate-800/90 rounded-lg p-2 text-left">
                   <div className="flex items-center gap-1 text-cyan-400 text-xs font-semibold mb-0.5">
                     <Building2 size={12} />
                     <span>40+</span>
                   </div>
                   <p className="text-[9px] text-slate-400 font-medium">Practitioner Speakers</p>
                 </div>
-                <div className="bg-slate-900/80 border border-slate-800/90 rounded-lg p-2.5 text-left">
+                <div className="bg-slate-900/80 border border-slate-800/90 rounded-lg p-2 text-left">
                   <div className="flex items-center gap-1 text-cyan-400 text-xs font-semibold mb-0.5">
                     <ShieldCheck size={12} />
                     <span>6 Tracks</span>
                   </div>
                   <p className="text-[9px] text-slate-400 font-medium">Focused Themes</p>
                 </div>
-                <div className="bg-slate-900/80 border border-slate-800/90 rounded-lg p-2.5 text-left">
+                <div className="bg-slate-900/80 border border-slate-800/90 rounded-lg p-2 text-left">
                   <div className="flex items-center gap-1 text-cyan-400 text-xs font-semibold mb-0.5">
                     <Sparkles size={12} />
                     <span>Awards Gala</span>
@@ -238,7 +238,7 @@ export function HeroSection() {
               </div>
 
               {/* Pass Tier Quick Access Bar */}
-              <div className="pt-2.5 border-t border-[rgba(0,229,255,0.15)] flex items-center justify-between text-[10px]">
+              <div className="pt-2 border-t border-[rgba(0,229,255,0.15)] flex items-center justify-between text-[10px]">
                 <span className="font-medium text-slate-300">
                   Complimentary CXO Pass Available
                 </span>
