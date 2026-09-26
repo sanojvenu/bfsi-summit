@@ -8,7 +8,6 @@ import { SponsorsSection } from "@/components/sections/sponsors";
 import { VenueSection } from "@/components/sections/venue";
 import { GallerySection } from "@/components/sections/gallery";
 import { RegisterSection } from "@/components/sections/register";
-import { CtaBanner } from "@/components/sections/cta-banner";
 
 export default function HomePage() {
   return (
@@ -23,7 +22,6 @@ export default function HomePage() {
       <SponsorsSection />
       <VenueSection />
       <RegisterSection />
-      <CtaBanner />
     </>
   );
 }
