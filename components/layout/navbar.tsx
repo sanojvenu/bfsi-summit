@@ -74,8 +74,8 @@ export function Navbar() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           scrolled
-            ? "bg-[rgba(5,11,20,0.92)] backdrop-blur-xl border-b border-[rgba(0,242,254,0.2)] py-2.5"
-            : "bg-transparent py-4"
+            ? "bg-[rgba(6,13,25,0.92)] backdrop-blur-xl border-b border-[rgba(255,255,255,0.08)] py-3 shadow-xl"
+            : "bg-transparent py-5"
         )}
         role="banner"
       >

@@ -205,59 +205,51 @@ export function HeroSection() {
 
           {/* ── Left column ── */}
           <div className="flex-1 min-w-0">
-            {/* Logo Banner in Hero */}
+            {/* Edition badge */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-6 rounded-full border border-[rgba(0,229,255,0.25)] bg-[rgba(0,229,255,0.05)]"
+            >
+              <span className="w-2 h-2 rounded-full bg-[var(--cyan-400)] animate-pulse-cyan" />
+              <span className="text-xs font-semibold tracking-wider uppercase text-[var(--cyan-400)]">
+                {SUMMIT.edition} Edition · {SUMMIT.year} · Mumbai
+              </span>
+            </motion.div>
+
+            {/* Headline with Logo */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="mb-6"
             >
               <Image
                 src="/logo.png"
                 alt="3rd BFSI Tech Innovation Summit 2027"
-                width={360}
-                height={120}
-                className="w-full max-w-sm md:max-w-md h-auto object-contain drop-shadow-[0_0_35px_rgba(0,242,254,0.35)]"
+                width={420}
+                height={140}
+                className="w-full max-w-sm sm:max-w-md h-auto object-contain drop-shadow-[0_0_25px_rgba(0,229,255,0.25)]"
                 priority
               />
             </motion.div>
 
-            {/* Edition badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-[rgba(0,242,254,0.4)] bg-[rgba(0,242,254,0.06)]"
-            >
-              <span className="w-2 h-2 rounded-full bg-[var(--cyan-400)] animate-pulse-cyan" />
-              <span className="text-xs font-semibold tracking-[0.18em] uppercase text-[var(--cyan-400)]">
-                {SUMMIT.edition} Edition · {SUMMIT.year} · Mumbai
-              </span>
-            </motion.div>
-
-            {/* Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 28 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display text-white leading-[1.06] mb-4"
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "clamp(2.6rem, 5.5vw, 5rem)",
-                fontWeight: 700,
-              }}
-            >
-              BFSI Tech<br />
-              <span className="gold-gradient">Innovation Summit</span>
-            </motion.h1>
-
-            {/* Theme */}
+            {/* Value Statement Subtitle */}
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
-              className="text-base text-[var(--text-secondary)] italic mb-5 max-w-xl leading-relaxed"
-              style={{ fontFamily: "var(--font-display)" }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="text-lg md:text-xl font-medium text-slate-200 mb-3 max-w-xl leading-relaxed"
+            >
+              India's Premier Technology & AI Leadership Summit for Banking, Financial Services & Insurance
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              className="text-sm text-[var(--text-secondary)] italic mb-6 max-w-lg"
             >
               "{SUMMIT.theme}"
             </motion.p>
@@ -266,8 +258,8 @@ export function HeroSection() {
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-wrap gap-2 mb-8"
+              transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-wrap gap-2.5 mb-8"
             >
               {[
                 { Icon: Calendar, text: `${SUMMIT.date} · ${SUMMIT.time}` },
@@ -275,9 +267,9 @@ export function HeroSection() {
               ].map(({ Icon, text }) => (
                 <span
                   key={text}
-                  className="inline-flex items-center gap-1.5 text-xs text-[var(--text-secondary)] bg-[rgba(255,255,255,0.04)] border border-[var(--border-subtle)] rounded-full px-3 py-1.5"
+                  className="inline-flex items-center gap-2 text-xs font-medium text-[var(--text-secondary)] bg-[rgba(255,255,255,0.04)] border border-[var(--border-subtle)] rounded-lg px-3.5 py-2"
                 >
-                  <Icon size={11} className="text-[var(--gold-400)]" />
+                  <Icon size={13} className="text-[var(--cyan-400)]" />
                   {text}
                 </span>
               ))}
