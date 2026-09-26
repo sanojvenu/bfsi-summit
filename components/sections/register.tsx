@@ -202,7 +202,7 @@ export function RegisterSection() {
         </FadeIn>
 
         {/* GFF-style Delegate Pass Tiers Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 max-w-5xl mx-auto">
           {[
             {
               name: "CXO VIP Pass",
@@ -247,32 +247,32 @@ export function RegisterSection() {
             <div
               key={pass.name}
               className={cn(
-                "rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 relative shadow-xl backdrop-blur-md",
+                "rounded-xl p-5 flex flex-col justify-between transition-all duration-300 relative shadow-lg backdrop-blur-md",
                 pass.highlight
-                  ? "bg-slate-900/90 border-2 border-cyan-400/80 shadow-[0_0_30px_rgba(0,229,255,0.2)]"
+                  ? "bg-slate-900/90 border-2 border-cyan-400/80 shadow-[0_0_20px_rgba(0,229,255,0.2)]"
                   : "bg-slate-900/60 border border-slate-800/80 hover:border-slate-700"
               )}
             >
               {pass.highlight && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-extrabold text-[10px] tracking-widest uppercase px-3.5 py-1 rounded-full shadow-md">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-extrabold text-[9px] tracking-widest uppercase px-3 py-0.5 rounded-full shadow-md">
                   Most Popular
                 </div>
               )}
               <div>
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <h3 className="font-bold text-lg text-white">{pass.name}</h3>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <h3 className="font-bold text-base text-white">{pass.name}</h3>
                 </div>
-                <span className={cn("inline-block text-[11px] font-semibold px-2.5 py-1 rounded-full border mb-4", pass.badgeColor)}>
+                <span className={cn("inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full border mb-3", pass.badgeColor)}>
                   {pass.badge}
                 </span>
-                <p className="text-xs text-slate-300 font-medium mb-4 leading-relaxed">
-                  <span className="text-slate-400 block text-[10px] uppercase tracking-wider mb-0.5">Target Audience:</span>
+                <p className="text-[11px] text-slate-300 font-medium mb-3 leading-relaxed">
+                  <span className="text-slate-400 block text-[9px] uppercase tracking-wider mb-0.5">Target Audience:</span>
                   {pass.forWho}
                 </p>
-                <div className="h-px bg-slate-800 my-4" />
-                <ul className="flex flex-col gap-2.5 mb-6">
+                <div className="h-px bg-slate-800/80 my-3" />
+                <ul className="flex flex-col gap-2 mb-4">
                   {pass.features.map((feat) => (
-                    <li key={feat} className="flex items-start gap-2 text-xs text-slate-300">
+                    <li key={feat} className="flex items-start gap-1.5 text-[11px] text-slate-300">
                       <span className="text-cyan-400 font-bold mt-0.5">✓</span>
                       <span>{feat}</span>
                     </li>
@@ -286,7 +286,7 @@ export function RegisterSection() {
                   document.getElementById("register-form")?.scrollIntoView({ behavior: "smooth" });
                 }}
                 className={cn(
-                  "w-full text-center py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all",
+                  "w-full text-center py-2 rounded-lg text-[11px] font-bold uppercase tracking-wider transition-all",
                   pass.highlight
                     ? "btn-primary"
                     : "btn-outline"
@@ -298,26 +298,26 @@ export function RegisterSection() {
           ))}
         </div>
 
-        <div id="register-form" className="max-w-2xl mx-auto pt-4">
+        <div id="register-form" className="max-w-xl mx-auto pt-2">
 
           {/* Progress bar */}
-          <div className="mb-8">
-            <div className="flex justify-between mb-2">
+          <div className="mb-6">
+            <div className="flex justify-between mb-1.5">
               {STEPS.map((s, i) => (
                 <div key={s.id} className="flex flex-col items-center gap-1">
                   <div className={cn(
-                    "w-7 h-7 rounded-full border-2 flex items-center justify-center text-xs font-bold transition-all duration-400",
+                    "w-6 h-6 rounded-full border flex items-center justify-center text-[10px] font-bold transition-all duration-400",
                     i < step
-                      ? "bg-[var(--gold-500)] border-[var(--gold-500)] text-[var(--navy-900)]"
+                      ? "bg-[var(--cyan-400)] border-[var(--cyan-400)] text-slate-950"
                       : i === step
-                        ? "border-[var(--gold-500)] text-[var(--gold-400)]"
+                        ? "border-[var(--cyan-400)] text-[var(--cyan-400)]"
                         : "border-[var(--border-subtle)] text-[var(--text-muted)]"
                   )}>
                     {i < step ? "✓" : i + 1}
                   </div>
                   <span className={cn(
-                    "text-[9px] tracking-widest uppercase hidden sm:block",
-                    i === step ? "text-[var(--gold-400)]" : "text-[var(--text-muted)]"
+                    "text-[8px] tracking-widest uppercase hidden sm:block",
+                    i === step ? "text-[var(--cyan-400)]" : "text-[var(--text-muted)]"
                   )}>
                     {s.title}
                   </span>
@@ -327,7 +327,7 @@ export function RegisterSection() {
             <div className="relative h-1 bg-[var(--border-subtle)] rounded-full overflow-hidden">
               <motion.div
                 className="absolute inset-y-0 left-0 rounded-full"
-                style={{ background: "linear-gradient(90deg, var(--gold-600), var(--gold-400))" }}
+                style={{ background: "linear-gradient(90deg, var(--cyan-500), var(--magenta-500))" }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               />
@@ -335,7 +335,7 @@ export function RegisterSection() {
           </div>
 
           {/* Step card */}
-          <div className="card-surface rounded-2xl p-6 sm:p-8">
+          <div className="card-surface rounded-xl p-5 sm:p-6">
             <AnimatePresence mode="wait">
               <motion.div
                 key={step}

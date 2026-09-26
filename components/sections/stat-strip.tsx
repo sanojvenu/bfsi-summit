@@ -24,23 +24,23 @@ export function StatStrip() {
       <div className="container relative z-10">
 
         {/* Event stats (Rich Executive Dark Cards) */}
-        <Stagger className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
+        <Stagger className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
           {eventStats.map((stat) => (
             <StaggerItem key={stat.label}>
-              <div className="bg-slate-900/90 border border-slate-800/80 hover:border-cyan-500/40 p-6 md:p-8 rounded-2xl flex flex-col gap-2 h-full shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <div className="bg-slate-900/90 border border-slate-800/80 hover:border-cyan-500/40 p-4 sm:p-5 rounded-xl flex flex-col gap-1.5 h-full shadow-lg transition-all duration-300 hover:-translate-y-1">
                 <span
-                  className="font-display text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-fuchsia-400 tabular-nums leading-tight"
+                  className="font-display text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-fuchsia-400 tabular-nums leading-tight"
                   aria-label={`${stat.prefix ?? ""}${stat.value}${stat.suffix ?? ""} ${stat.label}`}
                 >
                   {stat.prefix}
                   <AnimatedCounter value={stat.value} duration={1.8} />
                   {stat.suffix}
                 </span>
-                <span className="text-sm font-bold text-slate-100 tracking-wide">
+                <span className="text-xs font-bold text-slate-100 tracking-wide">
                   {stat.label}
                 </span>
                 {stat.description && (
-                  <span className="text-xs text-slate-400 leading-relaxed font-medium">
+                  <span className="text-[11px] text-slate-400 leading-snug font-medium">
                     {stat.description}
                   </span>
                 )}
@@ -51,47 +51,47 @@ export function StatStrip() {
 
         {/* Sector pulse */}
         <FadeIn>
-          <div className="section-label justify-center mb-6">
+          <div className="section-label justify-center mb-4">
             India BFSI Sector Pulse
           </div>
-          <p className="text-center text-[var(--text-muted)] text-xs mb-8">
+          <p className="text-center text-[var(--text-muted)] text-[11px] mb-6">
             Real, cited statistics — not invented.
           </p>
         </FadeIn>
 
-        <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
           {sectorStats.map((stat) => (
             <StaggerItem key={stat.label}>
-              <div className="card-surface-glass rounded-xl p-6 h-full flex flex-col gap-3">
+              <div className="card-surface-glass rounded-xl p-4 sm:p-5 h-full flex flex-col gap-2">
                 <div className="flex items-start justify-between gap-2">
                   <span
-                    className="font-display font-bold text-2xl sm:text-3xl text-white leading-tight"
+                    className="font-display font-bold text-xl sm:text-2xl text-white leading-tight"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {stat.value}
                   </span>
                   {stat.trend && (
-                    <span className={`flex items-center gap-1 text-[10px] font-semibold px-2 py-1 rounded-full ${
+                    <span className={`flex items-center gap-1 text-[9px] font-semibold px-2 py-0.5 rounded-full ${
                       stat.trend === "up"
                         ? "bg-emerald-500/10 text-emerald-400"
                         : "bg-red-500/10 text-red-400"
                     }`}>
                       {stat.trend === "up"
-                        ? <TrendingUp size={10} />
-                        : <TrendingDown size={10} />
+                        ? <TrendingUp size={9} />
+                        : <TrendingDown size={9} />
                       }
                       {stat.trendLabel}
                     </span>
                   )}
                 </div>
-                <p className="text-sm font-medium text-[var(--text-primary)]">
+                <p className="text-xs font-medium text-[var(--text-primary)]">
                   {stat.label}
                 </p>
                 <a
                   href={stat.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[10px] text-[var(--text-muted)] hover:text-[var(--gold-400)] transition-colors mt-auto"
+                  className="text-[10px] text-[var(--text-muted)] hover:text-[var(--cyan-400)] transition-colors mt-auto"
                   aria-label={`Source: ${stat.source}`}
                 >
                   Source: {stat.source} ↗
@@ -102,8 +102,8 @@ export function StatStrip() {
         </Stagger>
 
         {/* Marquee sponsor strip */}
-        <div className="mt-16">
-          <p className="text-center text-xs tracking-widest uppercase text-[var(--text-muted)] mb-6">
+        <div className="mt-10">
+          <p className="text-center text-[10px] tracking-widest uppercase text-[var(--text-muted)] mb-4">
             Trusted by leaders from
           </p>
           <div className="overflow-hidden relative">

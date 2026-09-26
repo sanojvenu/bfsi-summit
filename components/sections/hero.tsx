@@ -61,7 +61,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-[88vh] flex flex-col justify-center overflow-hidden py-24"
+      className="relative min-h-[75vh] flex flex-col justify-center overflow-hidden py-14 sm:py-16"
       style={{ background: "radial-gradient(ellipse at 50% 20%, #0d1e3a 0%, #050b14 75%)" }}
       aria-label="BFSI Tech Innovation Summit 2027 Hero"
     >
@@ -95,13 +95,13 @@ export function HeroSection() {
 
           {/* Edition badge */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 mb-8 rounded-full border border-[rgba(0,242,254,0.35)] bg-[rgba(0,242,254,0.08)] backdrop-blur-md"
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-3.5 py-1 mb-5 rounded-full border border-[rgba(0,242,254,0.35)] bg-[rgba(0,242,254,0.08)] backdrop-blur-md"
           >
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-cyan-300">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+            <span className="text-[11px] font-semibold tracking-wider uppercase text-cyan-300">
               {SUMMIT.edition} Annual Edition · {SUMMIT.year} · Mumbai
             </span>
           </motion.div>
@@ -110,61 +110,61 @@ export function HeroSection() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="mb-8 flex justify-center"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mb-5 flex justify-center"
           >
             <Image
               src="/logo.png"
               alt="3rd BFSI Tech Innovation Summit 2027"
-              width={460}
-              height={150}
-              className="w-full max-w-sm sm:max-w-md md:max-w-lg h-auto object-contain drop-shadow-[0_0_35px_rgba(0,242,254,0.35)]"
+              width={380}
+              height={120}
+              className="w-full max-w-[280px] sm:max-w-xs md:max-w-sm h-auto object-contain drop-shadow-[0_0_25px_rgba(0,242,254,0.35)]"
               priority
             />
           </motion.div>
 
           {/* Value Subtitle */}
           <motion.h1
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white max-w-3xl leading-snug mb-4 font-display"
+            transition={{ duration: 0.6, delay: 0.18 }}
+            className="text-xl sm:text-2xl md:text-3xl font-bold text-white max-w-2xl leading-snug mb-3 font-display"
           >
             India's Premier Technology & AI Leadership Forum for Banking, Financial Services & Insurance
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.28 }}
-            className="text-base text-slate-400 italic mb-8 max-w-xl font-medium"
+            transition={{ duration: 0.5, delay: 0.24 }}
+            className="text-xs sm:text-sm text-slate-400 italic mb-6 max-w-lg font-medium"
           >
             "{SUMMIT.theme}"
           </motion.p>
 
           {/* Date & Venue Pills */}
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            className="flex flex-wrap justify-center gap-3 mb-10"
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-wrap justify-center gap-2.5 mb-6"
           >
-            <span className="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 bg-slate-900/80 border border-slate-800 rounded-lg px-4 py-2.5 shadow-sm">
-              <Calendar size={14} className="text-cyan-400" />
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 bg-slate-900/80 border border-slate-800 rounded-lg px-3.5 py-1.5 shadow-sm">
+              <Calendar size={13} className="text-cyan-400" />
               {SUMMIT.date} · {SUMMIT.time}
             </span>
-            <span className="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 bg-slate-900/80 border border-slate-800 rounded-lg px-4 py-2.5 shadow-sm">
-              <MapPin size={14} className="text-cyan-400" />
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 bg-slate-900/80 border border-slate-800 rounded-lg px-3.5 py-1.5 shadow-sm">
+              <MapPin size={13} className="text-cyan-400" />
               Jio World Convention Centre, Mumbai
             </span>
           </motion.div>
 
           {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.42 }}
-            className="flex flex-wrap justify-center items-center gap-4 mb-12"
+            transition={{ duration: 0.5, delay: 0.36 }}
+            className="flex flex-wrap justify-center items-center gap-3 mb-8"
           >
             <a
               href="#register"
@@ -173,7 +173,7 @@ export function HeroSection() {
               id="hero-register-cta"
             >
               <span>Request Invitation</span>
-              <ArrowRight size={16} />
+              <ArrowRight size={14} />
             </a>
             <a
               href="#agenda"
@@ -188,9 +188,9 @@ export function HeroSection() {
           {/* Countdown Display */}
           {mounted && (
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.42 }}
             >
               <CountdownDisplay />
             </motion.div>
