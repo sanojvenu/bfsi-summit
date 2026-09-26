@@ -3,47 +3,51 @@
 
 /* ─── Design Tokens ─────────────────────────────────── */
 :root {
-  /* Core palette — Clean Light Corporate Theme */
-  --navy-950: #0f172a;
-  --navy-900: #1e3a8a;
-  --navy-800: #1e40af;
-  --navy-700: #2563eb;
-  --navy-600: #3b82f6;
-  --navy-500: #60a5fa;
+  /* Core palette — Rich Executive Dark Theme */
+  --navy-950: #050b14;
+  --navy-900: #091326;
+  --navy-800: #0f1d3a;
+  --navy-700: #14264d;
+  --navy-600: #1b3569;
+  --navy-500: #2554a0;
 
-  /* Brand Accents */
-  --cyan-500: #0284c7;
-  --cyan-400: #0369a1;
-  --cyan-300: #0e7490;
+  /* Brand Logo Palette (Electric Cyan -> Royal Blue -> Neon Magenta) */
+  --cyan-500: #00F2FE;
+  --cyan-400: #00E5FF;
+  --cyan-300: #70F3FF;
 
-  --blue-600: #1e3a8a;
-  --blue-500: #2563eb;
-  --blue-400: #3b82f6;
+  --blue-600: #0052D4;
+  --blue-500: #0066FF;
+  --blue-400: #38BDF8;
+
+  --purple-500: #9D00FF;
+  --purple-400: #D800FF;
+  --magenta-500: #E000FF;
 
   /* Legacy variable maps for compatibility */
-  --gold-600: #1e3a8a;
-  --gold-500: #2563eb;
-  --gold-400: #0284c7;
-  --gold-300: #0369a1;
-  --gold-100: #dbeafe;
+  --gold-600: #0066FF;
+  --gold-500: #00E5FF;
+  --gold-400: #00F2FE;
+  --gold-300: #70F3FF;
+  --gold-100: #E0F2FE;
 
   --teal-600: #0284c7;
-  --teal-500: #0369a1;
-  --teal-400: #2563eb;
-  --teal-300: #1d4ed8;
+  --teal-500: #00E5FF;
+  --teal-400: #38BDF8;
+  --teal-300: #70F3FF;
 
-  /* Surfaces — Clean Light Mode Default */
-  --surface-dark: #f8fafc;
-  --surface-mid: #ffffff;
-  --surface-card: #ffffff;
-  --surface-hover: #f1f5f9;
+  /* Surfaces — Rich Dark Space Theme */
+  --surface-dark: #050b14;
+  --surface-mid: #091326;
+  --surface-card: #0f1d3a;
+  --surface-hover: #14264d;
 
-  --text-primary: #0f172a;
-  --text-secondary: #334155;
-  --text-muted: #64748b;
+  --text-primary: #f8fafc;
+  --text-secondary: #94aac4;
+  --text-muted: #5c7a9c;
 
-  --border-subtle: #e2e8f0;
-  --border-default: #cbd5e1;
+  --border-subtle: rgba(0, 229, 255, 0.15);
+  --border-default: rgba(0, 229, 255, 0.3);
 
   /* Typography */
   --font-display: 'Playfair Display', Georgia, serif;
@@ -60,15 +64,15 @@
 
 /* Light mode overrides */
 .light {
-  --surface-dark: #f8fafc;
-  --surface-mid: #ffffff;
-  --surface-card: #ffffff;
-  --surface-hover: #f1f5f9;
-  --text-primary: #0f172a;
-  --text-secondary: #334155;
-  --text-muted: #64748b;
-  --border-subtle: #e2e8f0;
-  --border-default: #cbd5e1;
+  --surface-dark: #050b14;
+  --surface-mid: #091326;
+  --surface-card: #0f1d3a;
+  --surface-hover: #14264d;
+  --text-primary: #f8fafc;
+  --text-secondary: #94aac4;
+  --text-muted: #5c7a9c;
+  --border-subtle: rgba(0, 229, 255, 0.15);
+  --border-default: rgba(0, 229, 255, 0.3);
 }
 
 /* ─── Base Reset & Body ─────────────────────────────── */
@@ -107,30 +111,30 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: var(--navy-950);
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: linear-gradient(180deg, var(--cyan-400), var(--purple-400));
   border-radius: 3px;
 }
 
 /* ─── Selection ─────────────────────────────────────── */
 ::selection {
-  background: rgba(37, 99, 235, 0.2);
-  color: #0f172a;
+  background: rgba(0, 229, 255, 0.3);
+  color: #ffffff;
 }
 
 /* ─── Utility Classes ───────────────────────────────── */
 .gold-gradient,
 .brand-gradient {
-  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #0284c7 100%);
+  background: linear-gradient(135deg, #00F2FE 0%, #38BDF8 40%, #A855F7 75%, #E000FF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .navy-gradient {
-  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  background: linear-gradient(180deg, var(--navy-950) 0%, var(--surface-mid) 100%);
 }
 
 .gold-border,
@@ -141,21 +145,23 @@ body {
 .gold-line,
 .brand-line {
   height: 1px;
-  background: linear-gradient(90deg, transparent, #cbd5e1, transparent);
+  background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.4), transparent);
 }
 
 .card-surface {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
-  border-radius: 12px;
+  background: rgba(15, 29, 58, 0.7);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
 }
 
 .card-surface-glass {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-  border-radius: 12px;
+  background: rgba(9, 19, 38, 0.8);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  border-radius: 14px;
 }
 
 /* ─── Button Styles ─────────────────────────────────── */
@@ -164,26 +170,26 @@ body {
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.75rem;
-  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+  background: linear-gradient(135deg, #00F2FE 0%, #0066FF 50%, #9D00FF 100%);
   color: #ffffff;
   font-family: var(--font-body);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.875rem;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
-  transition: all 0.25s var(--ease-premium);
+  box-shadow: 0 4px 20px rgba(0, 242, 254, 0.25);
+  transition: all 0.3s var(--ease-premium);
   position: relative;
   overflow: hidden;
 }
 
 .btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
-  background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 242, 254, 0.4), 0 0 15px rgba(224, 0, 255, 0.3);
 }
 
 .btn-primary span {
@@ -196,13 +202,14 @@ body {
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.75rem;
-  background: #ffffff;
-  color: #0f172a;
+  background: rgba(0, 229, 255, 0.05);
+  color: var(--cyan-400);
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.875rem;
   letter-spacing: 0.02em;
-  border: 1px solid #cbd5e1;
+  text-transform: uppercase;
+  border: 1px solid rgba(0, 229, 255, 0.35);
   border-radius: 8px;
   cursor: pointer;
   text-decoration: none;
@@ -210,9 +217,10 @@ body {
 }
 
 .btn-outline:hover {
-  background: #f8fafc;
-  border-color: #2563eb;
-  color: #2563eb;
+  background: rgba(0, 229, 255, 0.12);
+  border-color: var(--cyan-300);
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
 }
 
 .btn-outline:hover {

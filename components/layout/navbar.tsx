@@ -74,8 +74,8 @@ export function Navbar() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           scrolled
-            ? "bg-white/95 backdrop-blur-md border-b border-slate-200 py-3 shadow-sm"
-            : "bg-white/80 backdrop-blur-sm border-b border-slate-100 py-4"
+            ? "bg-[rgba(5,11,20,0.92)] backdrop-blur-xl border-b border-[rgba(0,229,255,0.18)] py-3 shadow-xl"
+            : "bg-[rgba(5,11,20,0.6)] backdrop-blur-md py-4 border-b border-[rgba(255,255,255,0.05)]"
         )}
         role="banner"
       >
@@ -93,7 +93,7 @@ export function Navbar() {
                 alt="3rd BFSI Tech Innovation Summit 2027 Logo"
                 width={180}
                 height={60}
-                className="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                className="h-full w-auto object-contain drop-shadow-[0_0_15px_rgba(0,242,254,0.3)] group-hover:scale-105 transition-transform duration-300"
                 priority
               />
             </div>
@@ -116,8 +116,8 @@ export function Navbar() {
                   className={cn(
                     "text-sm font-semibold tracking-wide transition-colors duration-200 relative",
                     isActive
-                      ? "text-blue-600 font-bold"
-                      : "text-slate-700 hover:text-blue-600"
+                      ? "text-[var(--cyan-400)] font-bold"
+                      : "text-[var(--text-secondary)] hover:text-white"
                   )}
                 >
                   {link.label}
