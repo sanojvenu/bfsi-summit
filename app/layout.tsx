@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
-import { UrgencyBar } from "@/components/layout/urgency-bar";
 import { Footer } from "@/components/layout/footer";
 import { SUMMIT } from "@/lib/utils";
 
@@ -80,7 +79,6 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body className="min-h-screen flex flex-col antialiased">
-        <UrgencyBar />
         <Navbar />
         <main id="main-content" className="flex-1">
           {children}

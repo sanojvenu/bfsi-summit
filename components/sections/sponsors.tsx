@@ -30,19 +30,19 @@ export function SponsorsSection() {
       aria-labelledby="sponsors-heading"
     >
       <div className="container relative z-10">
-        <FadeIn className="text-center mb-12">
+        <FadeIn className="text-center mb-8">
           <div className="section-label justify-center">Partners & Sponsors</div>
           <h2 id="sponsors-heading" className="section-title text-center">
             Industry Leaders{" "}
             <span className="brand-gradient">Powering the Summit</span>
           </h2>
-          <p className="section-subtitle mx-auto text-center">
-            The BFSI Tech Innovation Summit is supported by premier technology and services companies equipping India's financial sector leadership for the digital decade.
+          <p className="section-subtitle mx-auto text-center max-w-2xl">
+            Premier technology and services companies supporting India's BFSI leadership for the digital decade.
           </p>
         </FadeIn>
 
         {/* Tiered sponsor display */}
-        <div className="flex flex-col gap-10 mb-14">
+        <div className="flex flex-col gap-7 mb-10">
           {Object.entries(grouped).map(([tier, tierSponsors]) => {
             const style = tierStyles[tier as keyof typeof tierStyles];
             return (

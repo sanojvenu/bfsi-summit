@@ -52,7 +52,7 @@ export const agendaSessions: AgendaSession[] = [
     description: "An expansive opening address on the systemic transformation underway in Indian banking — from the Jan Dhan-Aadhaar-Mobile stack to GenAI-native customer journeys. How do we preserve trust while accelerating innovation at a scale the world has never seen?",
     track: "Keynote",
     speakerIds: ["sp-01"],
-    speakerNames: ["Rajesh Sharma"],
+    speakerNames: ["Amit Sharma"],
     hall: "Plenary Hall A",
     isHighlight: true,
   },

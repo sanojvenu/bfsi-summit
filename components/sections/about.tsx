@@ -26,7 +26,7 @@ export function AboutSection() {
       <div className="container relative z-10">
 
         {/* Executive Overview & Who Should Attend Split */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start mb-8">
           
           <FadeIn className="lg:col-span-6">
             <div className="section-label">About the Summit</div>
@@ -71,25 +71,25 @@ export function AboutSection() {
         </div>
 
         {/* Strategic Conference Themes */}
-        <FadeIn className="text-center mb-8">
+        <FadeIn className="text-center mb-5">
           <div className="section-label justify-center">Conference Themes</div>
           <h2 className="section-title text-center">
             Six <span className="brand-gradient">Strategic Tracks</span>
           </h2>
         </FadeIn>
 
-        <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {summitTracks.map((track) => {
             const Icon = iconMap[track.icon] ?? Brain;
             return (
               <StaggerItem key={track.id}>
-                <div className="card-surface gradient-strip-top rounded-xl p-4.5 h-full group hover:border-[var(--cyan-400)] transition-all duration-300">
-                  <div className="flex items-start gap-3 mb-2.5">
+                <div className="card-surface gradient-strip-top rounded-xl p-4 h-full group hover:border-[var(--cyan-400)] transition-all duration-300">
+                  <div className="flex items-start gap-2.5 mb-2">
                     <div
-                      className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                      className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
                       style={{ background: `${track.color}20` }}
                     >
-                      <Icon size={16} style={{ color: track.color }} />
+                      <Icon size={14} style={{ color: track.color }} />
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="text-xs font-bold text-[var(--text-primary)] leading-tight group-hover:text-[var(--cyan-300)] transition-colors">
@@ -100,7 +100,7 @@ export function AboutSection() {
                       </span>
                     </div>
                   </div>
-                  <p className="text-[11px] text-[var(--text-muted)] leading-relaxed">
+                  <p className="text-[10px] text-[var(--text-muted)] leading-relaxed line-clamp-2">
                     {track.description}
                   </p>
                 </div>

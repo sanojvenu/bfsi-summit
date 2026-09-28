@@ -9,13 +9,13 @@ import { SUMMIT } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#agenda", label: "Agenda" },
+  { href: "#hero", label: "Home" },
+  { href: "#why-attend", label: "About" },
+  { href: "#themes", label: "Themes" },
   { href: "#speakers", label: "Speakers" },
+  { href: "#agenda", label: "Agenda" },
   { href: "#awards", label: "Awards" },
-  { href: "#sponsors", label: "Sponsors" },
   { href: "#venue", label: "Venue" },
-  { href: "#register", label: "Register", cta: true },
 ];
 
 export function Navbar() {
@@ -62,8 +62,17 @@ export function Navbar() {
   const handleNavClick = (href: string) => {
     setMobileOpen(false);
     if (href.startsWith("#")) {
-      const el = document.getElementById(href.slice(1));
-      el?.scrollIntoView({ behavior: "smooth" });
+      const id = href.slice(1);
+      if (id === "hero") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+      const el = document.getElementById(id) || document.getElementById(id === "about" ? "why-attend" : id);
+      if (el) {
+        const navOffset = 85;
+        const targetY = el.getBoundingClientRect().top + window.scrollY - navOffset;
+        window.scrollTo({ top: Math.max(0, targetY), behavior: "smooth" });
+      }
     }
   };
 
@@ -105,7 +114,7 @@ export function Navbar() {
             role="navigation"
             aria-label="Main navigation"
           >
-            {navLinks.filter((l) => !l.cta).map((link) => {
+            {navLinks.map((link) => {
               const sectionId = link.href.startsWith("#") ? link.href.slice(1) : "";
               const isActive = sectionId === activeSection;
               return (
@@ -144,10 +153,11 @@ export function Navbar() {
             <a
               href="#register"
               onClick={(e) => { e.preventDefault(); handleNavClick("#register"); }}
-              className="btn-primary text-xs px-5 py-2.5"
+              className="btn-blue text-xs py-2 px-4.5 rounded-lg flex items-center gap-1.5 shadow-md hover:shadow-lg"
               id="nav-register-cta"
             >
-              <span>Request Invite</span>
+              <span>Request Invitation</span>
+              <span className="text-sm font-bold">→</span>
             </a>
           </nav>
 
@@ -192,12 +202,7 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                  className={cn(
-                    "text-xl font-medium py-3 border-b border-[var(--border-subtle)] transition-colors",
-                    link.cta
-                      ? "text-[var(--gold-400)] font-bold"
-                      : "text-[var(--text-primary)] hover:text-[var(--gold-400)]"
-                  )}
+                  className="text-lg font-medium py-3 border-b border-[var(--border-subtle)] text-[var(--text-primary)] hover:text-cyan-400 transition-colors"
                 >
                   {link.label}
                 </a>

@@ -191,13 +191,13 @@ export function RegisterSection() {
       <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" aria-hidden="true" />
 
       <div className="container relative z-10">
-        <FadeIn className="text-center mb-12">
+        <FadeIn className="text-center mb-8">
           <div className="section-label justify-center">Registration & Delegate Passes</div>
           <h2 id="register-heading" className="section-title text-center">
             Choose Your <span className="gold-gradient">Summit Pass</span>
           </h2>
-          <p className="section-subtitle mx-auto text-center">
-            The {SUMMIT.name} is curated for senior technology and innovation leaders across banking, financial services, and insurance. Select your pass tier below to request an invitation.
+          <p className="section-subtitle mx-auto text-center max-w-2xl">
+            Curated for senior technology and innovation leaders across BFSI. Choose your pass to request an invitation.
           </p>
         </FadeIn>
 
@@ -254,11 +254,11 @@ export function RegisterSection() {
               )}
             >
               {pass.highlight && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-extrabold text-[9px] tracking-widest uppercase px-3 py-0.5 rounded-full shadow-md">
+                <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-extrabold text-[9px] tracking-widest uppercase px-3 py-0.5 rounded-full shadow-md z-10">
                   Most Popular
                 </div>
               )}
-              <div>
+              <div className={pass.highlight ? "pt-2" : ""}>
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <h3 className="font-bold text-base text-white">{pass.name}</h3>
                 </div>

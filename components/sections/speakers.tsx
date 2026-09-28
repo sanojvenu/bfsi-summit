@@ -1,252 +1,201 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import * as Dialog from "@radix-ui/react-dialog";
 import { speakers, type Speaker } from "@/data/speakers";
-import { FadeIn, Stagger, StaggerItem } from "@/components/ui/animations";
 import { agendaSessions } from "@/data/agenda";
-import { X, ExternalLink, ChevronRight } from "lucide-react";
+import { X, ExternalLink, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { trackColors } from "@/data/agenda";
 
-function SpeakerAvatar({
+function SpeakerModal({
   speaker,
-  size = "md",
+  open,
+  onClose,
 }: {
-  speaker: Speaker;
-  size?: "sm" | "md" | "lg";
+  speaker: Speaker | null;
+  open: boolean;
+  onClose: () => void;
 }) {
-  const sizeMap = {
-    sm: "w-12 h-12 text-sm",
-    md: "w-16 h-16 text-base",
-    lg: "w-24 h-24 text-xl",
-  };
-  return (
-    <div
-      className={cn(
-        "rounded-full flex items-center justify-center font-bold text-white flex-shrink-0",
-        sizeMap[size]
-      )}
-      style={{ background: speaker.avatarColor }}
-      aria-hidden="true"
-    >
-      {speaker.initials}
-    </div>
-  );
-}
-
-function SpeakerModal({ speaker }: { speaker: Speaker }) {
+  if (!speaker) return null;
   const session = agendaSessions.find((s) => s.id === speaker.sessionId);
 
   return (
-    <Dialog.Portal>
-      <Dialog.Overlay className="fixed inset-0 z-50 bg-[rgba(6,17,31,0.85)] backdrop-blur-sm" />
-      <Dialog.Content
-        className="fixed inset-0 z-50 flex items-center justify-center p-4"
-        aria-describedby={`speaker-${speaker.id}-bio`}
-      >
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.96, y: 10 }}
-          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto card-surface rounded-2xl"
-        >
-          {/* Header */}
-          <div className="p-6 sm:p-8 border-b border-[var(--border-subtle)]">
-            <div className="flex items-start gap-5">
-              <SpeakerAvatar speaker={speaker} size="lg" />
-              <div className="flex-1 min-w-0">
-                <Dialog.Title className="font-display text-xl sm:text-2xl font-bold text-[var(--text-primary)] leading-tight mb-1" style={{ fontFamily: "var(--font-display)" }}>
+    <Dialog.Root open={open} onOpenChange={(v) => !v && onClose()}>
+      <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-[#060c18]/80 backdrop-blur-sm" />
+        <Dialog.Content className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96, y: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.96, y: 10 }}
+            transition={{ duration: 0.25 }}
+            className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto bg-[#0d1627] text-white border border-slate-700/80 rounded-2xl shadow-2xl p-6 sm:p-8"
+          >
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 p-2 text-slate-400 hover:text-white rounded-full bg-slate-800/80 hover:bg-slate-700 transition-colors"
+              aria-label="Close dialog"
+            >
+              <X size={18} />
+            </button>
+
+            {/* Header info */}
+            <div className="flex items-center gap-4 mb-6">
+              <div className="relative w-20 h-24 rounded-xl overflow-hidden border border-cyan-500/40 flex-shrink-0 shadow-md">
+                {speaker.photo ? (
+                  <Image
+                    src={speaker.photo}
+                    alt={speaker.name}
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  <div
+                    className="w-full h-full flex items-center justify-center font-bold text-white text-xl"
+                    style={{ background: speaker.avatarColor }}
+                  >
+                    {speaker.initials}
+                  </div>
+                )}
+              </div>
+
+              <div>
+                <Dialog.Title className="text-xl sm:text-2xl font-bold text-white leading-tight">
                   {speaker.name}
                 </Dialog.Title>
-                <p className="text-sm text-[var(--gold-400)] font-medium">{speaker.title}</p>
-                <p className="text-sm text-[var(--text-muted)]">{speaker.company}</p>
+                <p className="text-cyan-400 font-semibold text-sm mt-0.5">{speaker.title}</p>
+                <p className="text-slate-300 text-sm">{speaker.company}</p>
                 {speaker.linkedin && (
                   <a
                     href={speaker.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-xs text-[var(--teal-400)] hover:text-[var(--teal-300)] mt-2 transition-colors"
+                    className="inline-flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300 mt-2 transition-colors"
                   >
                     <ExternalLink size={12} />
-                    LinkedIn Profile
+                    <span>LinkedIn Profile</span>
                   </a>
                 )}
               </div>
             </div>
-          </div>
 
-          {/* Bio */}
-          <div className="p-6 sm:p-8">
-            <h3 className="text-xs font-semibold tracking-widest uppercase text-[var(--text-muted)] mb-3">
-              Biography
-            </h3>
-            <p id={`speaker-${speaker.id}-bio`} className="text-sm text-[var(--text-secondary)] leading-relaxed mb-6">
-              {speaker.bio}
-            </p>
+            {/* Bio */}
+            <div className="mb-6">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+                Executive Biography
+              </h4>
+              <p className="text-slate-300 text-sm leading-relaxed">{speaker.bio}</p>
+            </div>
 
-            {/* Session */}
+            {/* Speaking Session */}
             {session && (
-              <div className="rounded-xl bg-[rgba(212,165,75,0.06)] border border-[var(--border-subtle)] p-5">
-                <h3 className="text-xs font-semibold tracking-widest uppercase text-[var(--text-muted)] mb-3">
-                  Speaking At
-                </h3>
-                <div className="flex flex-wrap items-center gap-2 mb-2">
-                  <span className={cn(
-                    "text-[10px] border rounded-full px-2.5 py-0.5 font-semibold uppercase tracking-wider",
-                    trackColors[session.track]
-                  )}>
-                    {session.track}
-                  </span>
-                  <span className="text-xs font-semibold text-[#00E5FF]">
-                    {session.time.replace(":", ":")} AM–
-                    {session.endTime}
-                  </span>
+              <div className="rounded-xl bg-slate-900/90 border border-slate-800 p-4">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 block mb-1">
+                  Speaking Session
+                </span>
+                <p className="text-sm font-semibold text-white leading-snug">{session.title}</p>
+                <div className="flex items-center gap-3 mt-2 text-xs text-slate-400">
+                  <span>Track: {session.track}</span>
+                  <span>•</span>
+                  <span>Time: {session.time} IST</span>
                 </div>
-                <p className="text-sm font-semibold text-[var(--text-primary)]">{session.title}</p>
               </div>
             )}
-          </div>
-
-          {/* Close button */}
-          <Dialog.Close
-            className="absolute top-4 right-4 p-2 text-[var(--text-muted)] hover:text-white hover:bg-[var(--surface-hover)] rounded-lg transition-colors"
-            aria-label="Close speaker profile"
-          >
-            <X size={18} />
-          </Dialog.Close>
-        </motion.div>
-      </Dialog.Content>
-    </Dialog.Portal>
-  );
-}
-
-function SpeakerCard({ speaker }: { speaker: Speaker }) {
-  return (
-    <Dialog.Root>
-      <Dialog.Trigger asChild>
-        <button
-          className="speaker-card card-surface gradient-strip-top rounded-xl text-left w-full group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cyan-400)] overflow-hidden"
-          aria-label={`View ${speaker.name}'s profile`}
-          id={`speaker-card-${speaker.id}`}
-        >
-          <div className="p-5">
-            <div className="flex items-start gap-4 mb-4">
-              {/* Avatar with glow */}
-              <div className="relative flex-shrink-0">
-                <div
-                  className="w-14 h-14 rounded-full flex items-center justify-center text-sm font-bold text-white shadow-md"
-                  style={{ background: speaker.avatarColor }}
-                  aria-hidden="true"
-                >
-                  {speaker.initials}
-                </div>
-                <div
-                  className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-400"
-                  style={{ boxShadow: `0 0 20px ${speaker.avatarColor}77` }}
-                  aria-hidden="true"
-                />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="text-sm font-bold text-[var(--text-primary)] leading-tight group-hover:text-[var(--cyan-400)] transition-colors">
-                  {speaker.name}
-                </h3>
-                <p className="text-xs text-[var(--cyan-300)] mt-0.5 leading-snug font-medium">{speaker.title}</p>
-                <p className="text-xs text-[var(--text-muted)] mt-0.5 truncate">{speaker.company}</p>
-              </div>
-            </div>
-
-            {speaker.sessionTitle && (
-              <div className="border-t border-[rgba(0,229,255,0.12)] pt-3">
-                <p className="text-[10px] font-semibold tracking-wide uppercase text-[var(--text-muted)] mb-1">
-                  Speaking on
-                </p>
-                <p className="text-xs text-[var(--text-secondary)] line-clamp-2 leading-relaxed font-normal">
-                  {speaker.sessionTitle}
-                </p>
-              </div>
-            )}
-
-            <div className="flex items-center gap-1 mt-3 text-[10px] font-semibold text-[var(--cyan-400)] opacity-70 group-hover:opacity-100 transition-opacity">
-              View full profile <ChevronRight size={10} />
-            </div>
-          </div>
-        </button>
-      </Dialog.Trigger>
-
-      <AnimatePresence>
-        <SpeakerModal speaker={speaker} />
-      </AnimatePresence>
+          </motion.div>
+        </Dialog.Content>
+      </Dialog.Portal>
     </Dialog.Root>
   );
 }
 
 export function SpeakersSection() {
-  const featured = speakers.filter((s) => s.featured);
-  const rest = speakers.filter((s) => !s.featured);
+  const [selectedSpeaker, setSelectedSpeaker] = useState<Speaker | null>(null);
+  const [showAll, setShowAll] = useState(false);
+
+  // First 4 featured speakers matching reference image
+  const displaySpeakers = showAll ? speakers : speakers.slice(0, 4);
 
   return (
     <section
       id="speakers"
-      className="section relative overflow-hidden"
-      style={{ background: "var(--surface-dark)" }}
-      aria-labelledby="speakers-heading"
+      className="bg-white py-16 lg:py-24 text-slate-900 relative scroll-mt-24"
+      aria-label="Keynote and Panel Speakers"
     >
       <div className="container">
-        <FadeIn className="text-center mb-12">
-          <div className="section-label justify-center">Speakers & Thought Leaders</div>
-          <h2 id="speakers-heading" className="section-title text-center">
-            Learn From{" "}
-            <span className="brand-gradient">Operators, Not Pundits</span>
-          </h2>
-          <p className="section-subtitle mx-auto text-center">
-            Every speaker at the Summit is a practitioner — a CXO or senior leader who has done the work, shipped the product, and can show you the results.
-          </p>
-        </FadeIn>
-
-        {/* Featured speakers */}
-        {featured.length > 0 && (
-          <div className="mb-8">
-            <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--cyan-400)] mb-5 flex items-center gap-2">
-              <span className="w-4 h-px bg-gradient-to-r from-[#00F2FE] to-[#E000FF]" />
-              Featured Speakers
-            </h3>
-            <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-              {featured.map((sp) => (
-                <StaggerItem key={sp.id}>
-                  <SpeakerCard speaker={sp} />
-                </StaggerItem>
-              ))}
-            </Stagger>
-          </div>
-        )}
-
-        {/* All speakers */}
-        {rest.length > 0 && (
+        {/* Header row */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
           <div>
-            <h3 className="text-xs font-semibold tracking-[0.15em] uppercase text-[var(--cyan-400)] mb-5 flex items-center gap-2">
-              <span className="w-4 h-px bg-gradient-to-r from-[#00F2FE] to-[#E000FF]" />
-              Also Speaking
-            </h3>
-            <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {rest.map((sp) => (
-                <StaggerItem key={sp.id}>
-                  <SpeakerCard speaker={sp} />
-                </StaggerItem>
-              ))}
-            </Stagger>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 block mb-2">
+              SPEAKERS
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-950 tracking-tight">
+              The people behind the change.
+            </h2>
           </div>
-        )}
 
-        {/* More TBA */}
-        <FadeIn className="mt-10 text-center">
-          <p className="text-sm text-[var(--text-muted)]">
-            Additional speakers to be announced. More confirmed shortly.
-          </p>
-        </FadeIn>
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#0070f3] hover:text-blue-700 transition-colors self-start sm:self-auto cursor-pointer"
+          >
+            <span>{showAll ? "Show Top Speakers" : "View All Speakers"}</span>
+            <ArrowRight size={14} />
+          </button>
+        </div>
+
+        {/* 4 Cards Row matching reference */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+          {displaySpeakers.map((speaker) => (
+            <div
+              key={speaker.id}
+              onClick={() => setSelectedSpeaker(speaker)}
+              className="group cursor-pointer relative aspect-[3/4] rounded-2xl overflow-hidden shadow-lg border border-slate-200/90 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+            >
+              {/* Speaker Portrait Photo */}
+              {speaker.photo ? (
+                <Image
+                  src={speaker.photo}
+                  alt={speaker.name}
+                  fill
+                  className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+              ) : (
+                <div
+                  className="w-full h-full flex items-center justify-center font-bold text-white text-4xl"
+                  style={{ background: speaker.avatarColor }}
+                >
+                  {speaker.initials}
+                </div>
+              )}
+
+              {/* Bottom Dark Vignette Overlay for Crisp Typography */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#060c18] via-[#060c18]/60 to-transparent" />
+
+              {/* Bottom Content Info */}
+              <div className="absolute bottom-0 left-0 right-0 p-5 text-white z-10">
+                <h3 className="text-base sm:text-lg font-bold text-white leading-tight group-hover:text-cyan-300 transition-colors">
+                  {speaker.name}
+                </h3>
+                <p className="text-xs font-semibold text-cyan-400 mt-1">
+                  {speaker.title}
+                </p>
+                <p className="text-xs text-slate-300 mt-0.5 font-medium line-clamp-1">
+                  {speaker.company}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
+
+      {/* Speaker details modal */}
+      <SpeakerModal
+        speaker={selectedSpeaker}
+        open={Boolean(selectedSpeaker)}
+        onClose={() => setSelectedSpeaker(null)}
+      />
     </section>
   );
 }
